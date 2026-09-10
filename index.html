@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1020">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Poker Coach">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<title>Poker Coach</title>
+<style>
+:root{--bg:#080d18;--card:#111a2d;--card2:#0d1525;--text:#eef2ff;--muted:#9aa8bf;--accent:#60a5fa;--good:#34d399;--bad:#fb7185;--line:#26324b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:84px}
+header{position:sticky;top:0;z-index:5;padding:16px max(16px,calc((100% - 900px)/2));background:#080d18ee;backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.wrap{max-width:900px;margin:auto}.brand{font-weight:800;font-size:20px}.muted{color:var(--muted)}.tiny{font-size:12px;color:var(--muted)}
+main{max-width:900px;margin:auto;padding:18px}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px}.hero{padding:22px}.kicker{color:var(--accent);font-size:11px;text-transform:uppercase;letter-spacing:.13em;font-weight:800}.title{font-size:28px;font-weight:800;margin:7px 0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{background:var(--card2);border:1px solid var(--line);padding:12px;border-radius:11px}.stat b{font-size:21px;display:block}.bar{height:8px;background:#202b42;border-radius:99px;overflow:hidden}.bar>i{display:block;height:100%;background:var(--accent)}button{font:inherit}.btn{border:0;border-radius:11px;padding:12px 15px;background:var(--accent);color:#06101d;font-weight:800}.btn.secondary{background:#202b42;color:var(--text)}.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}.btn:disabled{opacity:.45}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.option{padding:14px;border:1px solid var(--line);border-radius:11px;background:#101a2d;margin:8px 0;cursor:pointer}.option.sel{border-color:var(--accent);background:#132440}.feedback{padding:14px;border-radius:11px;margin-top:12px}.good{background:#06352a;border:1px solid #166b57}.bad{background:#3a1720;border:1px solid #7d2940}.pill{display:inline-block;padding:5px 8px;border-radius:99px;background:#202b42;font-size:11px;margin:3px}.nav{position:fixed;bottom:0;left:0;right:0;background:#0c1424f5;border-top:1px solid var(--line);display:flex;justify-content:center;gap:3px;padding:8px env(safe-area-inset-right) calc(8px + env(safe-area-inset-bottom)) env(safe-area-inset-left);z-index:9}.nav button{background:transparent;border:0;color:var(--muted);padding:7px 10px;font-size:11px}.nav button.active{color:var(--text)}.nav span{display:block;font-size:19px;margin-bottom:2px}textarea,input,select{width:100%;background:#0b1322;border:1px solid var(--line);color:var(--text);padding:11px;border-radius:10px}label{display:block;color:var(--muted);font-size:12px;margin:11px 0 5px}.list{display:grid;gap:8px}.row{padding:12px;border:1px solid var(--line);border-radius:11px}.hidden{display:none!important}.explain{line-height:1.55}.hand{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#0b1322;padding:12px;border-radius:10px;margin:10px 0;white-space:pre-wrap}.section-title{display:flex;justify-content:space-between;align-items:center}.progressRing{font-size:13px}
+@media(max-width:600px){main{padding:12px}.title{font-size:24px}.grid{grid-template-columns:1fr 1fr}.card{padding:15px}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="brand">♠ Poker Coach</div><div class="tiny" id="header"></div></div></header>
+<main>
+<section id="today"></section><section id="train" class="hidden"></section><section id="review" class="hidden"></section><section id="progress" class="hidden"></section>
+</main>
+<nav class="nav">
+<button data-page="today"> <span>♠</span>Today</button>
+<button data-page="train"> <span>🎯</span>Train</button>
+<button data-page="review"> <span>📝</span>Hands</button>
+<button data-page="progress"> <span>📈</span>Progress</button>
+</nav>
+<script>
+const days=[
+["Foundation","Baseline & process","Review 10 uncertain hands. Write your 3 biggest leaks.","Decision quality > results."],
+["Foundation","Position","Build approximate UTG/HJ/CO/BTN/SB opening ranges.","Position drives range width."],
+["Foundation","Opening ranges","Drill 20 opens/folds and explain each.","Think in ranges."],
+["Foundation","3-betting","Value vs bluff 3-bets; compare IP/OOP.","Position + stack depth."],
+["Foundation","Facing 3-bets","Review calls, 4-bets and folds at 30–50bb.","Avoid automatic calls."],
+["Foundation","BB defence","Study BTN vs BB and drill 20 decisions.","Price + position."],
+["Foundation","Weekly review","Review Days 1–6; choose 3 leaks to attack.","Consolidate."],
+["Foundation","C-bet basics","Dry vs wet boards; small vs large sizing.","Range advantage."],
+["Foundation","Turn strategy","Identify cards that change the ranges.","Equity shifts."],
+["Foundation","River value","Ask: what worse hands call?","Thin value."],
+["Foundation","Bluffing","Find natural bluff candidates and blockers.","Missing ≠ bluffing."],
+["Foundation","Bet sizing","Re-size 15 historical decisions and explain why.","Purpose before size."],
+["Foundation","Stack depths","Compare 50/30/20/15/10bb strategy.","SPR + fold equity."],
+["Foundation","Foundation test","20 mixed spots; write your reasoning.","Find uncertainty."],
+["Preflop","UTG/HJ","Drill early-position opens.","Tight range."],
+["Preflop","CO","Drill 20 CO spots.","Wider than HJ."],
+["Preflop","BTN","Drill 20 BTN spots.","Maximum positional pressure."],
+["Preflop","SB","Study SB raise/limp concepts.","OOP dynamics."],
+["Preflop","BB vs BTN","Drill 20 BB decisions.","Defend intelligently."],
+["Preflop","BB vs CO","Compare with BB vs BTN.","Range interaction."],
+["Preflop","BB vs SB","Study limps and raises.","Punish leaks."],
+["Preflop","3-bet sizing","Build a simple sizing framework.","Consistency."],
+["Preflop","4-bet decisions","Review 15 4-bet spots.","Value + blockers."],
+["Preflop","Cold calls","Find profitable vs problematic calls.","Avoid dominated hands."],
+["Preflop","20–25bb","Adjust opening and reshove ranges.","Stack-to-pot ratio."],
+["Preflop","15bb","Drill raise/fold, shove and call-jam concepts.","No autopilot."],
+["Preflop","10bb","Study push/fold fundamentals.","Fold equity."],
+["Preflop","7bb","Drill shove/call decisions.","Range discipline."],
+["Preflop","Preflop exam","30 mixed spots without charts.","Accuracy + speed."],
+["Preflop","Monthly review","Identify 5 recurring preflop errors.","Consolidate."],
+["Postflop","Range vs range","Map both ranges on 10 flops.","Think distributions."],
+["Postflop","Nut advantage","Find boards where one range has more nuts.","Structural advantage."],
+["Postflop","Range advantage","Compare overall equity and strongest hands.","Don't confuse the two."],
+["Postflop","Dry boards","Drill A72r/K83r/Q74r.","Small bets often work."],
+["Postflop","Connected boards","Drill T98/987/765.","More equity shifts."],
+["Postflop","Paired boards","Study 10 paired textures.","Board interaction."],
+["Postflop","Monotone boards","Study flush-board strategy.","Blockers matter."],
+["Postflop","C-bet frequency","Review 20 c-bet decisions.","Avoid autopilot."],
+["Postflop","Check-backs","Find hands that benefit from checking.","Realisation."],
+["Postflop","Turn barrels","Review 15 double barrels.","Good cards matter."],
+["Postflop","Turn checks","Find turns where aggression should stop.","Range protection."],
+["Postflop","Turn sizing","Compare small vs big bets.","Polarisation."],
+["Postflop","River polarisation","Identify value/bluff ends.","Nuts or air."],
+["Postflop","River bluff-catch","Ask what bluffs exist.","Blockers + population."],
+["Postflop","River raises","Study value/bluff raises.","Respect under-bluffing."],
+["Postflop","Thin value","Find hands that beat enough worse calls.","Value > fear."],
+["Postflop","Blockers","Drill 15 blocker decisions.","Combinatorics intuition."],
+["Postflop","Overbets","Study when big sizes make sense.","Polarised ranges."],
+["Postflop","Simplification","Create practical approximations.","Transferable rules."],
+["Postflop","Postflop exam","20 mixed spots with explanations.","Reasoning first."],
+["Postflop","Review","Review your 10 hardest hands.","Consolidate."],
+["Exploitation","Population reads","Create 5 evidence-based pool tendencies.","Data > anecdotes."],
+["Exploitation","Over-folders","Find profitable bluff spots.","Attack capped ranges."],
+["Exploitation","Calling stations","Thin value more.","Don't force bluffs."],
+["Exploitation","Under-bluffers","Find folds vs river aggression.","Protect bankroll."],
+["Exploitation","Passive players","Attack missed aggression.","Pressure."],
+["Exploitation","Aggressive players","Find bluff-catchers and traps.","Don't overfold."],
+["Exploitation","Live profiles","Classify behaviour without stereotyping.","Observe."],
+["Exploitation","Live sizing","Track unusual bet sizes + showdowns.","Information."],
+["Exploitation","Live timing","Record timing cautiously.","Small edge."],
+["Exploitation","Table selection","Define ideal fields/tables.","Edge starts here."],
+["Exploitation","Seat selection","Value position on weak players.","Positional EV."],
+["Exploitation","Isolation","Study limper isolation ranges.","Punish dead money."],
+["Exploitation","Multiway","Tighten bluffing and value ranges.","Equity dilution."],
+["Exploitation","Short-handed","Adjust 6/5/4-handed.","More aggression."],
+["Exploitation","Heads-up","Study positional aggression.","Wide ranges."],
+["Exploitation","Exploit test","20 spots: theory answer + exploit answer.","Know when to deviate."],
+["Tournament","ICM basics","Learn why chips are not dollars near payouts.","Risk premium."],
+["Tournament","Bubble","Drill 15 bubble spots.","Pressure medium stacks."],
+["Tournament","Pay jumps","Study 10 pay-jump decisions.","Future equity."],
+["Tournament","Big-stack ICM","Apply pressure without punting.","Selective aggression."],
+["Tournament","Medium-stack ICM","Avoid unnecessary confrontations.","Risk premium."],
+["Tournament","Short-stack ICM","Know when to take risk.","Fold equity."],
+["Tournament","Final-table ranges","Study 6/5/4/3-handed transitions.","Dynamic ranges."],
+["Tournament","Final-table aggression","Identify pressure spots.","Risk premium."],
+["Tournament","Final-table defence","Avoid being exploited.","Counter-pressure."],
+["Tournament","Satellites","Study satellite-specific utility.","Seat value."],
+["Tournament","PKOs","Study bounty EV separately if relevant.","Calls change."],
+["Tournament","Re-entry","Write a disciplined re-entry policy.","No chasing."],
+["Tournament","Late reg","Understand stack/field trade-offs.","Decision framework."],
+["Tournament","Deep stack","Study 60–100bb late-stage spots.","Postflop skill."],
+["Tournament","Mid stage","Avoid autopilot grinding.","Accumulate efficiently."],
+["Tournament","Bubble review","Review 20 historical hands.","ICM lens."],
+["Tournament","Final-table review","Review one deep run end-to-end.","Big-picture."],
+["Tournament","ICM exam","20 spots with written reasoning.","No calculator first."],
+["Tournament","Tournament review","Summarise biggest tournament leaks.","Consolidate."],
+["Advanced","Build your game tree","Map a common BTN/BB spot.","Repeatable framework."],
+["Advanced","Simplify ranges","Create practical memorisation ranges.","Accuracy > complexity."],
+["Advanced","Solver study","Inspect spots with a specific question.","Don't worship outputs."],
+["Advanced","Node-lock concept","Understand exploitative counterfactuals.","Population adjustments."],
+["Advanced","Equity estimation","Estimate ranges without tools.","Speed."],
+["Advanced","Combinatorics","Count value/bluff combos.","River skill."],
+["Advanced","Mixed strategies","Understand why frequencies exist.","Theory."],
+["Advanced","EV thinking","Translate actions into expected value.","Long-run mindset."],
+["Advanced","Bankroll review","Set ABI + shot rules.","Protect capital."],
+["Advanced","Mental game","Identify top 3 tilt triggers.","Process."],
+["Advanced","Session discipline","Create stop-play rules.","No revenge poker."],
+["Advanced","Warm-up","Build a 10-minute pre-session routine.","Consistency."],
+["Advanced","Post-session","Build a 15-minute review routine.","Capture learning."],
+["Advanced","Database audit","Review recurring categories.","Leak finding."],
+["Advanced","ROI humility","Understand sample-size noise.","Don't chase results."],
+["Advanced","Shot-taking","Define objective move-up criteria.","Evidence + bankroll."],
+["Advanced","Downswing plan","Write automatic move-down rules.","No ego."],
+["Advanced","Live vs online","Compare error patterns by format.","Transfer skills."],
+["Advanced","Personal strategy guide","Write your one-page rules.","Make knowledge usable."],
+["Advanced","Final assessment","30 mixed tournament spots.","Benchmark."],
+["Advanced","90-day review","Set the next 90-day cycle.","Keep compounding."]
+];
+
+const examples=[
+{t:"Example 1 — C-bet on a dry king-high flop",s:"30bb effective · BTN vs BB",h:"BTN opens 2.2bb with A♠7♠\nBB calls\nFlop: K♦ 8♣ 3♥\nPot: ~4.9bb · BB checks",q:"What is the best practical plan?",o:["Always check because A-high missed","Use a small bet at a high frequency, while keeping some checks","Bet 75–100% pot with almost your whole range","Shove"],a:1,e:"BTN has a useful range advantage on this relatively dry K-high board. A small sizing can apply pressure cheaply. This is a simplified training rule—not a claim that every solver uses one exact frequency."},
+{t:"Example 2 — River value bet",s:"40bb effective · BTN vs BB",h:"BTN opens, BB calls\nFlop: Q♠ 7♦ 2♣ — bet/call\nTurn: 7♠ — check/check\nRiver: 4♥\nBTN: A♠Q♦",q:"Should you consider a value bet?",o:["Yes, because worse Qx/7x-type bluff-catchers and pairs may call depending on ranges","No, top pair can never value bet river","Only if you are certain villain has a flush draw","Shove automatically"],a:0,e:"Start with the calling range: what worse hands can plausibly pay you? The correct size and frequency depend on the exact ranges and population. The key skill is identifying realistic worse calls."},
+{t:"Example 3 — Missed draw does not mean bluff",s:"25bb effective · BB vs BTN",h:"BTN opens, BB calls with 9♠8♠\nFlop: K♠ 7♦ 2♠\nTurn: 4♥\nRiver: K♦\nBB checks to BTN",q:"You miss the flush/straight possibilities. What should drive a river bluff?",o:["The fact that you missed","Whether your hand blocks calls/value and whether villain's range can fold","The size of the pot alone","Whether you lost the previous hand"],a:1,e:"Bluffing is a range decision. Blockers, your value combinations, villain's likely range and population tendencies all matter."},
+{t:"Example 4 — 15bb tournament decision",s:"15bb effective · CO first in",h:"9-max MTT · 15bb\nYou are CO with A♠5♠\nPlayers behind include BTN, SB, BB",q:"What is the right way to approach the decision?",o:["Treat it like a 100bb cash game hand","Consider stack depth, position, fold equity and reshove risk","Always limp because the stack is short","Always fold suited aces"],a:1,e:"At 15bb, raise/fold, open-jam, and raise/call dynamics become materially different. Exact ranges depend on antes, payout stage and player pool."},
+{t:"Example 5 — Bubble ICM",s:"Near bubble · 12bb",h:"20 players remain, 18 paid\nYou have 12bb, a big stack opens from CO, you are BTN\nYou hold a marginal calling hand",q:"What changes?",o:["Nothing; chip EV is always identical to money EV","ICM can make marginal calls less attractive because losing chips can cost more than gaining them is worth","You should call everything to survive","You should never play a hand near the bubble"],a:1,e:"Near the bubble, risk premium can make marginal chip-EV calls unattractive. Stack distributions, payouts and ranges matter; don't reduce ICM to 'fold everything'."},
+{t:"Example 6 — Exploit a calling station",s:"Live low-stakes MTT · 50bb",h:"Villain has shown several weak calls to large river bets\nYou value bet top pair on a safe river",q:"What is a useful exploit?",o:["Bluff more because they hate big bets","Value bet thinner and often choose sizes that extract from their calling range","Stop betting because they call too much","Only bet the nuts"],a:1,e:"Against a player who demonstrably calls too wide, shift toward value. The observation must be based on actual evidence, not a stereotype."}
+];
+
+let S=JSON.parse(localStorage.getItem("pc_pwa")||"null")||{day:1,done:[],ans:{},hands:[],notes:"",exDone:[]};
+function save(){localStorage.setItem("pc_pwa",JSON.stringify(S));render()}
+function page(p){document.querySelectorAll("main section").forEach(x=>x.classList.add("hidden"));document.getElementById(p).classList.remove("hidden");document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===p)); if(p==="today")renderToday();if(p==="train")renderTrain();if(p==="review")renderReview();if(p==="progress")renderProgress()}
+document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>page(b.dataset.page));
+function qForDay(d){let ex=examples[(d-1)%examples.length];return ex}
+function renderToday(){
+ let x=days[S.day-1], ex=qForDay(S.day), answered=S.ans[S.day]!==undefined, selected=S.ans[S.day];
+ document.getElementById("header").textContent=`Day ${S.day}/90 · ${S.done.length} complete`;
+ document.getElementById("today").innerHTML=`<div class="card hero"><div class="kicker">${x[0]} · Day ${S.day}</div><div class="title">${x[1]}</div><p class="muted">${x[2]}</p><div class="grid"><div class="stat"><span class="tiny">Study</span><b>60 min</b></div><div class="stat"><span class="tiny">Streak</span><b>${streak()}</b></div></div><div style="margin-top:15px"><div class="tiny">90-day progress</div><div class="bar"><i style="width:${S.done.length/90*100}%"></i></div></div></div>
+ <div class="card"><div class="section-title"><h3>Today's 60-minute session</h3><span class="pill">${x[3]}</span></div><p>10m — Warm-up & retrieve yesterday's concept</p><p>25m — Study today's concept</p><p>20m — Decision drill / hand example</p><p>5m — Journal the biggest lesson</p></div>
+ <div class="card"><div class="kicker">Featured hand</div><h3>${ex.t}</h3><p class="muted">${ex.s}</p><div class="hand">${ex.h}</div><p><b>${ex.q}</b></p><div id="opts">${ex.o.map((o,i)=>`<div class="option ${selected===i?'sel':''}" data-i="${i}">${o}</div>`).join("")}</div><button class="btn" id="submitEx" ${answered?"disabled":""}>Submit decision</button><div id="fb"></div></div>
+ <div class="card"><h3>Before you play tonight</h3><p class="muted">Do the featured hand first. During your session, save 3–5 hands where you were genuinely uncertain. Review them tomorrow—not immediately after the result.</p><button class="btn secondary" onclick="page('review')">Save a hand</button></div>`;
+ document.querySelectorAll("#opts .option").forEach(o=>o.onclick=()=>{if(S.ans[S.day]!==undefined)return;document.querySelectorAll("#opts .option").forEach(z=>z.classList.remove("sel"));o.classList.add("sel");o.parentNode.dataset.choice=o.dataset.i});
+ document.getElementById("submitEx").onclick=()=>{let c=document.getElementById("opts").dataset.choice;if(c===undefined)return;S.ans[S.day]=+c;save()};
+ if(answered){let fb=document.getElementById("fb");fb.className="feedback "+(selected===ex.a?"good":"bad");fb.innerHTML=`<b>${selected===ex.a?"Correct.":"Not quite."}</b><div class="explain">${ex.e}</div>`}
+ document.getElementById("today").insertAdjacentHTML("beforeend",`<div class="card"><div class="actions"><button class="btn" id="complete">${S.done.includes(S.day)?"Day completed ✓":"Complete day & continue"}</button><button class="btn ghost" id="reset">Reset answer</button></div></div>`);
+ document.getElementById("complete").onclick=()=>{if(!S.done.includes(S.day))S.done.push(S.day);if(S.day<90)S.day++;save()};
+ document.getElementById("reset").onclick=()=>{delete S.ans[S.day];save()};
+}
+function streak(){let n=0;for(let d=S.day;d>=1;d--){if(S.done.includes(d))n++;else if(d!==S.day)break}return n}
+function renderTrain(){
+ let cards=examples.map((e,i)=>`<div class="card"><div class="kicker">Example ${i+1}</div><h3>${e.t}</h3><span class="pill">${e.s}</span><div class="hand">${e.h}</div><p><b>${e.q}</b></p><div>${e.o.map((o,j)=>`<button class="btn ${S.exDone[i]!==undefined?'secondary':''}" style="margin:4px" onclick="answerExample(${i},${j})">${String.fromCharCode(65+j)}</button>`).join("")}</div>${S.exDone[i]!==undefined?`<div class="feedback ${S.exDone[i]===e.a?'good':'bad'}"><b>${S.exDone[i]===e.a?'Correct':'Review this'}</b><div class="explain">${e.e}</div></div>`:""}</div>`).join("");
+ document.getElementById("train").innerHTML=`<div class="card hero"><div class="kicker">Decision gym</div><div class="title">Learn by making decisions</div><p class="muted">Answer first. Then read the explanation. These examples teach transferable principles; exact solver frequencies vary with stack depth, antes, ranges and payout context.</p></div>${cards}`;
+}
+function answerExample(i,j){if(S.exDone[i]===undefined){S.exDone[i]=j;save();renderTrain()}}
+function renderReview(){
+ document.getElementById("review").innerHTML=`<div class="card"><div class="kicker">Hand review lab</div><h2>Capture uncertainty</h2><p class="muted">Don't only save huge pots. Save hands where your reasoning felt unclear.</p>
+ <label>Hand / situation</label><textarea id="ht" placeholder="30bb, BTN opens 2.2x with A♠7♠, BB calls..."></textarea>
+ <label>My decision</label><input id="dec" placeholder="Bet 25%">
+ <label>Confidence 1–5</label><select id="conf"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+ <label>What was I thinking?</label><textarea id="think"></textarea>
+ <label>After review: what would I change?</label><textarea id="learn"></textarea>
+ <div class="actions"><button class="btn" id="saveh">Save hand</button></div></div>
+ <div class="card"><h3>Saved hands (${S.hands.length})</h3><div class="list">${S.hands.slice().reverse().map(h=>`<div class="row"><b>${h.date}</b><span class="pill">Confidence ${h.conf}/5</span><div class="hand">${esc(h.hand)}</div><div class="muted"><b>Decision:</b> ${esc(h.dec)}</div><div class="muted"><b>Thinking:</b> ${esc(h.think)}</div><p><b>Lesson:</b> ${esc(h.learn||"Add after review.")}</p></div>`).join("")||"<p class='muted'>No hands saved yet.</p>"}</div></div>`;
+ document.getElementById("saveh").onclick=()=>{let h={date:new Date().toLocaleString(),hand:ht.value,dec:dec.value,conf:conf.value,think:think.value,learn:learn.value};if(!h.hand.trim())return;S.hands.push(h);save();renderReview()}
+}
+function renderProgress(){
+ let answered=Object.keys(S.ans).length, correct=Object.entries(S.ans).filter(([d,a])=>{let e=qForDay(+d);return a===e.a}).length;
+ document.getElementById("progress").innerHTML=`<div class="card hero"><div class="kicker">Your development</div><div class="title">Progress, not results</div><div class="grid"><div class="stat"><span class="tiny">Days</span><b>${S.done.length}/90</b></div><div class="stat"><span class="tiny">Drill accuracy</span><b>${answered?Math.round(correct/answered*100)+"%":"—"}</b></div><div class="stat"><span class="tiny">Hands reviewed</span><b>${S.hands.length}</b></div><div class="stat"><span class="tiny">Examples attempted</span><b>${S.exDone.length}</b></div></div></div>
+ <div class="card"><h3>Weekly review</h3><textarea id="wn" placeholder="What improved? What keeps going wrong? What will I focus on next week?">${esc(S.notes)}</textarea><div class="actions"><button class="btn" onclick="S.notes=document.getElementById('wn').value;save()">Save review</button></div></div>
+ <div class="card"><h3>Bankroll discipline</h3><p class="muted">Keep poker money separate from living expenses. Set a regular ABI, a move-down rule and a shot-taking rule before results influence you.</p></div>
+ <div class="card"><button class="btn ghost" onclick="if(confirm('Reset all app data?')){localStorage.removeItem('pc_pwa');location.reload()}">Reset all data</button></div>`;
+}
+function esc(s){return String(s||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]) )}
+function render(){renderToday();document.getElementById("header").textContent=`Day ${S.day}/90 · ${S.done.length} complete`}
+render();
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+}
+</script>
+</body></html>
