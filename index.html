@@ -1,8 +1,9 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0b1020">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080d18">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Poker Coach">
@@ -10,14 +11,17 @@
 <link rel="manifest" href="manifest.json">
 <title>Poker Coach</title>
 <style>
-:root{--bg:#080d18;--card:#111a2d;--card2:#0d1525;--text:#eef2ff;--muted:#9aa8bf;--accent:#60a5fa;--good:#34d399;--bad:#fb7185;--line:#26324b}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:84px}
-header{position:sticky;top:0;z-index:5;padding:16px max(16px,calc((100% - 900px)/2));background:#080d18ee;backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.wrap{max-width:900px;margin:auto}.brand{font-weight:800;font-size:20px}.muted{color:var(--muted)}.tiny{font-size:12px;color:var(--muted)}
-main{max-width:900px;margin:auto;padding:18px}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px}.hero{padding:22px}.kicker{color:var(--accent);font-size:11px;text-transform:uppercase;letter-spacing:.13em;font-weight:800}.title{font-size:28px;font-weight:800;margin:7px 0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{background:var(--card2);border:1px solid var(--line);padding:12px;border-radius:11px}.stat b{font-size:21px;display:block}.bar{height:8px;background:#202b42;border-radius:99px;overflow:hidden}.bar>i{display:block;height:100%;background:var(--accent)}button{font:inherit}.btn{border:0;border-radius:11px;padding:12px 15px;background:var(--accent);color:#06101d;font-weight:800}.btn.secondary{background:#202b42;color:var(--text)}.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}.btn:disabled{opacity:.45}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.chiprow{display:flex;gap:10px;flex-wrap:wrap}.chip{min-width:76px;padding:16px 12px;border:1px solid var(--line);border-radius:12px;background:#101a2d;color:var(--text);font-weight:800;font-size:18px}.chip.sel{border-color:var(--accent);background:#132440}.option{padding:14px;border:1px solid var(--line);border-radius:11px;background:#101a2d;margin:8px 0;cursor:pointer}.option.sel{border-color:var(--accent);background:#132440}.feedback{padding:14px;border-radius:11px;margin-top:12px}.good{background:#06352a;border:1px solid #166b57}.bad{background:#3a1720;border:1px solid #7d2940}.pill{display:inline-block;padding:5px 8px;border-radius:99px;background:#202b42;font-size:11px;margin:3px}.nav{position:fixed;bottom:0;left:0;right:0;background:#0c1424f5;border-top:1px solid var(--line);display:flex;justify-content:center;gap:3px;padding:8px env(safe-area-inset-right) calc(8px + env(safe-area-inset-bottom)) env(safe-area-inset-left);z-index:9}.nav button{background:transparent;border:0;color:var(--muted);padding:7px 10px;font-size:11px}.nav button.active{color:var(--text)}.nav span{display:block;font-size:19px;margin-bottom:2px}textarea,input,select{width:100%;background:#0b1322;border:1px solid var(--line);color:var(--text);padding:11px;border-radius:10px}label{display:block;color:var(--muted);font-size:12px;margin:11px 0 5px}.list{display:grid;gap:8px}.row{padding:12px;border:1px solid var(--line);border-radius:11px}.hidden{display:none!important}.explain{line-height:1.55}.hand{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#0b1322;padding:12px;border-radius:10px;margin:10px 0;white-space:pre-wrap}.section-title{display:flex;justify-content:space-between;align-items:center}.progressRing{font-size:13px}
-@media(max-width:600px){main{padding:12px}.title{font-size:24px}.grid{grid-template-columns:1fr 1fr}.card{padding:15px}}
-
-.poker-table{background:radial-gradient(circle at center,#17452f 0,#0d2d20 55%,#071b14 100%);border:2px solid #315b47;border-radius:28px;padding:22px 14px;margin:14px 0;box-shadow:inset 0 0 0 2px #0a2118,0 12px 30px #0006;text-align:center}.table-top{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#b7d2c5;margin-bottom:10px}.cards{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}.playing-card{width:64px;height:92px;background:#fff;border-radius:8px;color:#111;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:800;font-size:25px;box-shadow:0 3px 8px #0008;border:1px solid #ddd}.playing-card.red{color:#c62828}.playing-card .suit{font-size:26px;line-height:1}.playing-card:before{content:"";position:absolute;top:6px;left:7px;font-size:11px}.playing-card{position:relative}.playing-card:after{content:"";position:absolute;bottom:6px;right:7px;font-size:11px}.spot-card{overflow:hidden}.street{margin-top:10px;font-size:12px;color:#d7eee4}.action-line{font-size:13px;color:#d7eee4;margin-top:8px}.pot-line{font-weight:700;color:#fff}.decision-title{margin-top:14px}.feedback .explain{margin-top:8px}.complete-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+:root{--bg:#080d18;--card:#111a2d;--card2:#0d1525;--text:#eef2ff;--muted:#9aa8bf;--accent:#60a5fa;--good:#34d399;--bad:#fb7185;--line:#26324b;--raise:#ef4444;--call:#5ab966;--fold:#3d7cb8}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:92px}
+header{position:sticky;top:0;z-index:5;padding:14px max(14px,calc((100% - 980px)/2));background:#080d18ee;backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.wrap,main{max-width:980px;margin:auto}.brand{font-weight:800;font-size:20px}.muted{color:var(--muted)}.tiny{font-size:12px;color:var(--muted)}
+main{padding:14px}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:12px}.hero{padding:19px}.kicker{color:var(--accent);font-size:11px;text-transform:uppercase;letter-spacing:.13em;font-weight:800}.title{font-size:27px;font-weight:800;margin:7px 0}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.stat{background:var(--card2);border:1px solid var(--line);padding:12px;border-radius:11px}.stat b{font-size:21px;display:block}.bar{height:8px;background:#202b42;border-radius:99px;overflow:hidden}.bar>i{display:block;height:100%;background:var(--accent)}button{font:inherit}.btn{border:0;border-radius:11px;padding:12px 15px;background:var(--accent);color:#06101d;font-weight:800}.btn.secondary{background:#202b42;color:var(--text)}.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}.btn:disabled{opacity:.45}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.chiprow{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.chip{padding:15px 8px;border:1px solid var(--line);border-radius:12px;background:#101a2d;color:var(--text);font-weight:800;font-size:16px}.chip.sel{border-color:var(--accent);background:#132440}.option{padding:14px;border:1px solid var(--line);border-radius:11px;background:#101a2d;margin:8px 0;cursor:pointer}.option.sel{border-color:var(--accent);background:#132440}.feedback{padding:14px;border-radius:11px;margin-top:12px}.good{background:#06352a;border:1px solid #166b57}.bad{background:#3a1720;border:1px solid #7d2940}.pill{display:inline-block;padding:5px 8px;border-radius:99px;background:#202b42;font-size:11px;margin:3px}.nav{position:fixed;bottom:0;left:0;right:0;background:#0c1424f5;border-top:1px solid var(--line);display:flex;justify-content:center;gap:2px;padding:8px env(safe-area-inset-right) calc(8px + env(safe-area-inset-bottom)) env(safe-area-inset-left);z-index:9}.nav button{background:transparent;border:0;color:var(--muted);padding:7px 9px;font-size:11px}.nav button.active{color:var(--text)}.nav span{display:block;font-size:18px;margin-bottom:2px}textarea,input,select{width:100%;background:#0b1322;border:1px solid var(--line);color:var(--text);padding:11px;border-radius:10px}label{display:block;color:var(--muted);font-size:12px;margin:11px 0 5px}.list{display:grid;gap:8px}.row{padding:12px;border:1px solid var(--line);border-radius:11px}.hidden{display:none!important}.explain{line-height:1.55}.section-title{display:flex;justify-content:space-between;align-items:center;gap:8px}.complete-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.poker-table{background:radial-gradient(circle at center,#17452f 0,#0d2d20 55%,#071b14 100%);border:2px solid #315b47;border-radius:28px;padding:18px 14px;margin:12px 0;box-shadow:inset 0 0 0 2px #0a2118,0 12px 30px #0006;text-align:center}.table-top{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#b7d2c5;margin-bottom:10px}.cards{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}.playing-card{width:62px;height:88px;background:#fff;border-radius:8px;color:#111;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:800;font-size:24px;box-shadow:0 3px 8px #0008;border:1px solid #ddd}.playing-card.red{color:#c62828}.playing-card .suit{font-size:25px;line-height:1}.action-line{font-size:13px;color:#d7eee4;margin-top:8px}.pot-line{font-weight:700;color:#fff;margin-top:6px}
+.range-wrap{overflow-x:auto;padding-bottom:3px}.range-grid{display:grid;grid-template-columns:repeat(13,minmax(37px,1fr));gap:3px;min-width:515px}.range-cell{aspect-ratio:1;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;color:white;text-shadow:0 1px 2px #0008;border:1px solid #ffffff1c;position:relative;cursor:pointer;user-select:none}.range-cell.mix:after{content:"";position:absolute;inset:0;border:1px solid #fff8;border-radius:5px}.range-head{display:grid;grid-template-columns:repeat(13,minmax(37px,1fr));gap:3px;min-width:515px;margin-bottom:3px}.range-head div{font-size:9px;color:var(--muted);text-align:center}.legend{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.legend span{padding:7px 9px;border-radius:8px;font-size:11px;font-weight:800}.raise{background:#3a1519;border:1px solid #8f3038}.call{background:#18321f;border:1px solid #2f7740}.fold{background:#14283c;border:1px solid #2e5d89}.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:10px}.summary>div{padding:9px;border-radius:9px;text-align:center;font-weight:800;font-size:12px}.summarybar{height:9px;display:flex;border-radius:99px;overflow:hidden;margin-top:8px;background:#1c2430}.summarybar i:nth-child(1){background:var(--raise)}.summarybar i:nth-child(2){background:var(--call)}.summarybar i:nth-child(3){background:var(--fold)}
+.range-tabs{display:flex;gap:7px;overflow-x:auto;padding-bottom:4px}.range-tabs button{white-space:nowrap;border:1px solid var(--line);background:#101a2d;color:var(--muted);padding:9px 11px;border-radius:10px}.range-tabs button.active{color:var(--text);border-color:var(--accent);background:#132440}.chart-note{font-size:11px;color:var(--muted);line-height:1.45;margin-top:10px}
+.spot-meta{display:flex;gap:6px;flex-wrap:wrap}.freqline{display:flex;gap:7px;flex-wrap:wrap;margin-top:7px}.freq{padding:6px 8px;border-radius:8px;font-size:11px;font-weight:800}.freq.r{background:#3a1519;color:#ffb3b8}.freq.c{background:#18321f;color:#bde8c4}.freq.f{background:#14283c;color:#b9d5ee}
+.nextbar{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:12px}.nextbar .btn{min-width:100px}.sourcebox{font-size:11px;line-height:1.45;background:#0b1322;border:1px solid var(--line);padding:10px;border-radius:10px;margin-top:10px}
+@media(max-width:600px){main{padding:11px}.title{font-size:24px}.card{padding:14px}.range-grid,.range-head{min-width:520px}.chip{font-size:15px;padding:14px 5px}}
 </style>
 </head>
 <body>
@@ -26,247 +30,245 @@ main{max-width:900px;margin:auto;padding:18px}.card{background:var(--card);borde
 <section id="today"></section><section id="train" class="hidden"></section><section id="review" class="hidden"></section><section id="progress" class="hidden"></section>
 </main>
 <nav class="nav">
-<button data-page="today"> <span>♠</span>Today</button>
-<button data-page="train"> <span>🎯</span>Train</button>
-<button data-page="review"> <span>📝</span>Hands</button>
-<button data-page="progress"> <span>📈</span>Progress</button>
+<button data-page="today"><span>♠</span>Today</button>
+<button data-page="train"><span>🎯</span>Train</button>
+<button data-page="review"><span>📝</span>Hands</button>
+<button data-page="progress"><span>📈</span>Progress</button>
 </nav>
 <script>
-const days=[
-["Foundation","Baseline & process","Review 10 uncertain hands. Write your 3 biggest leaks.","Decision quality > results."],
-["Foundation","Position","Build approximate UTG/HJ/CO/BTN/SB opening ranges.","Position drives range width."],
-["Foundation","Opening ranges","Drill 20 opens/folds and explain each.","Think in ranges."],
-["Foundation","3-betting","Value vs bluff 3-bets; compare IP/OOP.","Position + stack depth."],
-["Foundation","Facing 3-bets","Review calls, 4-bets and folds at 30–50bb.","Avoid automatic calls."],
-["Foundation","BB defence","Study BTN vs BB and drill 20 decisions.","Price + position."],
-["Foundation","Weekly review","Review Days 1–6; choose 3 leaks to attack.","Consolidate."],
-["Foundation","C-bet basics","Dry vs wet boards; small vs large sizing.","Range advantage."],
-["Foundation","Turn strategy","Identify cards that change the ranges.","Equity shifts."],
-["Foundation","River value","Ask: what worse hands call?","Thin value."],
-["Foundation","Bluffing","Find natural bluff candidates and blockers.","Missing ≠ bluffing."],
-["Foundation","Bet sizing","Re-size 15 historical decisions and explain why.","Purpose before size."],
-["Foundation","Stack depths","Compare 50/30/20/15/10bb strategy.","SPR + fold equity."],
-["Foundation","Foundation test","20 mixed spots; write your reasoning.","Find uncertainty."],
-["Preflop","UTG/HJ","Drill early-position opens.","Tight range."],
-["Preflop","CO","Drill 20 CO spots.","Wider than HJ."],
-["Preflop","BTN","Drill 20 BTN spots.","Maximum positional pressure."],
-["Preflop","SB","Study SB raise/limp concepts.","OOP dynamics."],
-["Preflop","BB vs BTN","Drill 20 BB decisions.","Defend intelligently."],
-["Preflop","BB vs CO","Compare with BB vs BTN.","Range interaction."],
-["Preflop","BB vs SB","Study limps and raises.","Punish leaks."],
-["Preflop","3-bet sizing","Build a simple sizing framework.","Consistency."],
-["Preflop","4-bet decisions","Review 15 4-bet spots.","Value + blockers."],
-["Preflop","Cold calls","Find profitable vs problematic calls.","Avoid dominated hands."],
-["Preflop","20–25bb","Adjust opening and reshove ranges.","Stack-to-pot ratio."],
-["Preflop","15bb","Drill raise/fold, shove and call-jam concepts.","No autopilot."],
-["Preflop","10bb","Study push/fold fundamentals.","Fold equity."],
-["Preflop","7bb","Drill shove/call decisions.","Range discipline."],
-["Preflop","Preflop exam","30 mixed spots without charts.","Accuracy + speed."],
-["Preflop","Monthly review","Identify 5 recurring preflop errors.","Consolidate."],
-["Postflop","Range vs range","Map both ranges on 10 flops.","Think distributions."],
-["Postflop","Nut advantage","Find boards where one range has more nuts.","Structural advantage."],
-["Postflop","Range advantage","Compare overall equity and strongest hands.","Don't confuse the two."],
-["Postflop","Dry boards","Drill A72r/K83r/Q74r.","Small bets often work."],
-["Postflop","Connected boards","Drill T98/987/765.","More equity shifts."],
-["Postflop","Paired boards","Study 10 paired textures.","Board interaction."],
-["Postflop","Monotone boards","Study flush-board strategy.","Blockers matter."],
-["Postflop","C-bet frequency","Review 20 c-bet decisions.","Avoid autopilot."],
-["Postflop","Check-backs","Find hands that benefit from checking.","Realisation."],
-["Postflop","Turn barrels","Review 15 double barrels.","Good cards matter."],
-["Postflop","Turn checks","Find turns where aggression should stop.","Range protection."],
-["Postflop","Turn sizing","Compare small vs big bets.","Polarisation."],
-["Postflop","River polarisation","Identify value/bluff ends.","Nuts or air."],
-["Postflop","River bluff-catch","Ask what bluffs exist.","Blockers + population."],
-["Postflop","River raises","Study value/bluff raises.","Respect under-bluffing."],
-["Postflop","Thin value","Find hands that beat enough worse calls.","Value > fear."],
-["Postflop","Blockers","Drill 15 blocker decisions.","Combinatorics intuition."],
-["Postflop","Overbets","Study when big sizes make sense.","Polarised ranges."],
-["Postflop","Simplification","Create practical approximations.","Transferable rules."],
-["Postflop","Postflop exam","20 mixed spots with explanations.","Reasoning first."],
-["Postflop","Review","Review your 10 hardest hands.","Consolidate."],
-["Exploitation","Population reads","Create 5 evidence-based pool tendencies.","Data > anecdotes."],
-["Exploitation","Over-folders","Find profitable bluff spots.","Attack capped ranges."],
-["Exploitation","Calling stations","Thin value more.","Don't force bluffs."],
-["Exploitation","Under-bluffers","Find folds vs river aggression.","Protect bankroll."],
-["Exploitation","Passive players","Attack missed aggression.","Pressure."],
-["Exploitation","Aggressive players","Find bluff-catchers and traps.","Don't overfold."],
-["Exploitation","Live profiles","Classify behaviour without stereotyping.","Observe."],
-["Exploitation","Live sizing","Track unusual bet sizes + showdowns.","Information."],
-["Exploitation","Live timing","Record timing cautiously.","Small edge."],
-["Exploitation","Table selection","Define ideal fields/tables.","Edge starts here."],
-["Exploitation","Seat selection","Value position on weak players.","Positional EV."],
-["Exploitation","Isolation","Study limper isolation ranges.","Punish dead money."],
-["Exploitation","Multiway","Tighten bluffing and value ranges.","Equity dilution."],
-["Exploitation","Short-handed","Adjust 6/5/4-handed.","More aggression."],
-["Exploitation","Heads-up","Study positional aggression.","Wide ranges."],
-["Exploitation","Exploit test","20 spots: theory answer + exploit answer.","Know when to deviate."],
-["Tournament","ICM basics","Learn why chips are not dollars near payouts.","Risk premium."],
-["Tournament","Bubble","Drill 15 bubble spots.","Pressure medium stacks."],
-["Tournament","Pay jumps","Study 10 pay-jump decisions.","Future equity."],
-["Tournament","Big-stack ICM","Apply pressure without punting.","Selective aggression."],
-["Tournament","Medium-stack ICM","Avoid unnecessary confrontations.","Risk premium."],
-["Tournament","Short-stack ICM","Know when to take risk.","Fold equity."],
-["Tournament","Final-table ranges","Study 6/5/4/3-handed transitions.","Dynamic ranges."],
-["Tournament","Final-table aggression","Identify pressure spots.","Risk premium."],
-["Tournament","Final-table defence","Avoid being exploited.","Counter-pressure."],
-["Tournament","Satellites","Study satellite-specific utility.","Seat value."],
-["Tournament","PKOs","Study bounty EV separately if relevant.","Calls change."],
-["Tournament","Re-entry","Write a disciplined re-entry policy.","No chasing."],
-["Tournament","Late reg","Understand stack/field trade-offs.","Decision framework."],
-["Tournament","Deep stack","Study 60–100bb late-stage spots.","Postflop skill."],
-["Tournament","Mid stage","Avoid autopilot grinding.","Accumulate efficiently."],
-["Tournament","Bubble review","Review 20 historical hands.","ICM lens."],
-["Tournament","Final-table review","Review one deep run end-to-end.","Big-picture."],
-["Tournament","ICM exam","20 spots with written reasoning.","No calculator first."],
-["Tournament","Tournament review","Summarise biggest tournament leaks.","Consolidate."],
-["Advanced","Build your game tree","Map a common BTN/BB spot.","Repeatable framework."],
-["Advanced","Simplify ranges","Create practical memorisation ranges.","Accuracy > complexity."],
-["Advanced","Solver study","Inspect spots with a specific question.","Don't worship outputs."],
-["Advanced","Node-lock concept","Understand exploitative counterfactuals.","Population adjustments."],
-["Advanced","Equity estimation","Estimate ranges without tools.","Speed."],
-["Advanced","Combinatorics","Count value/bluff combos.","River skill."],
-["Advanced","Mixed strategies","Understand why frequencies exist.","Theory."],
-["Advanced","EV thinking","Translate actions into expected value.","Long-run mindset."],
-["Advanced","Bankroll review","Set ABI + shot rules.","Protect capital."],
-["Advanced","Mental game","Identify top 3 tilt triggers.","Process."],
-["Advanced","Session discipline","Create stop-play rules.","No revenge poker."],
-["Advanced","Warm-up","Build a 10-minute pre-session routine.","Consistency."],
-["Advanced","Post-session","Build a 15-minute review routine.","Capture learning."],
-["Advanced","Database audit","Review recurring categories.","Leak finding."],
-["Advanced","ROI humility","Understand sample-size noise.","Don't chase results."],
-["Advanced","Shot-taking","Define objective move-up criteria.","Evidence + bankroll."],
-["Advanced","Downswing plan","Write automatic move-down rules.","No ego."],
-["Advanced","Live vs online","Compare error patterns by format.","Transfer skills."],
-["Advanced","Personal strategy guide","Write your one-page rules.","Make knowledge usable."],
-["Advanced","Final assessment","30 mixed tournament spots.","Benchmark."],
-["Advanced","90-day review","Set the next 90-day cycle.","Keep compounding."]
+const RANKS="AKQJT98765432".split("");
+const POSITIONS=["UTG","UTG+1","LJ","HJ","CO","BTN","SB"];
+const CHART_KEY={"UTG":"UTG","UTG+1":"UTG1","LJ":"LJ","HJ":"HJ","CO":"CO","BTN":"BTN","SB":"SB"};
+const charts={"UTG":{"summary":[4.8,36.2,59.0],"cells":[[[20,0,0],[20,0,0],[0,20,0],[2,18,0],[8,12,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[18,2,0],[0,20,0],[10,10,0],[0,20,0]],[[12,8,0],[20,0,0],[8,12,0],[10,10,0],[5,15,0],[0,20,0],[0,20,0],[0,20,0],[2,18,0],[0,20,0],[3,17,0],[3,17,0],[0,20,0]],[[0,20,0],[0,20,0],[18,2,0],[16,4,0],[11,9,0],[3,17,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0]],[[4,16,0],[0,20,0],[0,20,0],[0,20,0],[7,13,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,0,20]],[[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[12,8,0],[4,16,0],[0,20,0],[0,20,0],[0,6,14],[0,0,20],[0,0,20],[0,0,20]],[[0,20,0],[0,4,16],[0,0,20],[0,0,20],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,0,20],[0,0,20],[0,0,20]],[[0,20,0],[0,0,20],[0,0,20],[0,0,20],[0,19,1],[0,0,20],[0,20,0],[8,12,0],[0,20,0],[0,20,0],[0,20,0],[0,0,20],[0,0,20]],[[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,12,8],[0,20,0],[7,13,0],[0,20,0],[0,20,0],[0,0,20],[0,0,20]],[[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,10,10],[0,20,0],[20,0,0],[0,20,0],[0,20,0],[0,0,20]],[[0,8,12],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,20,0],[0,20,0],[5,15,0],[0,20,0],[0,20,0]],[[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,17,3],[0,20,0],[1,19,0],[0,20,0]],[[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,20,0],[0,0,20]],[[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,20,0]]]},"UTG1":{"summary":[5.6,41.1,53.3],"cells":[[[20,0,0],[20,0,0],[0,20,0],[0,20,0],[11,9,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[19,1,0],[0,20,0],[6,14,0],[0,20,0]],[[14,6,0],[20,0,0],[20,0,0],[5,15,0],[9,11,0],[0,20,0],[0,20,0],[0,20,0],[2,18,0],[1,19,0],[0,20,0],[0,20,0],[0,20,0]],[[0,20,0],[0,20,0],[20,0,0],[20,0,0],[8,12,0],[1,19,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0]],[[6,14,0],[0,20,0],[0,20,0],[0,20,0],[19,1,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0]],[[2,18,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[19,1,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,0,20],[0,0,20]],[[0,20,0],[0,20,0],[0,0,20],[0,20,0],[0,20,0],[0,20,0],[1,19,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,0,20],[0,0,20]],[[0,20,0],[0,0,20],[0,0,20],[0,0,20],[0,20,0],[0,0,20],[0,20,0],[7,13,0],[0,20,0],[0,20,0],[0,20,0],[0,0,20],[0,0,20]],[[0,20,0],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,2,18],[0,20,0],[0,20,0],[15,5,0],[0,20,0],[0,20,0],[0,0,20],[0,0,20]],[[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,20,0],[0,20,0],[15,5,0],[0,20,0],[0,20,0],[0,0,20]],[[1,19,0],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,20,0],[0,20,0],[7,13,0],[0,20,0],[0,20,0]],[[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,20,0],[0,20,0],[0,20,0],[0,20,0]],[[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,20,0],[0,20,0]],[[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,20,0]]]},"LJ":{"summary":[6.8,44.8,48.4],"cells":[[[20,0,0],[20,0,0],[13,7,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[18,2,0],[0,20,0],[0,20,0],[0,20,0]],[[20,0,0],[20,0,0],[7,13,0],[20,0,0],[20,0,0],[0,20,0],[0,20,0],[0,20,0],[2,18,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0]],[[7,13,0],[0,20,0],[20,0,0],[20,0,0],[4,16,0],[3,17,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0]],[[0,20,0],[0,20,0],[0,20,0],[7,13,0],[20,0,0],[12,8,0],[1,19,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0]],[[9,11,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[20,0,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,0,20]],[[0,20,0],[0,20,0],[0,13,7],[0,20,0],[0,20,0],[0,20,0],[7,13,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,17,3]],[[0,20,0],[0,0,20],[0,0,20],[0,0,20],[0,20,0],[0,14,6],[0,20,0],[14,6,0],[0,20,0],[0,20,0],[0,20,0],[0,0,20],[0,0,20]],[[0,20,0],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,12,8],[0,20,0],[0,20,0],[18,2,0],[0,20,0],[0,20,0],[0,20,0],[0,0,20]],[[0,20,0],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,7,13],[0,18,2],[0,20,0],[11,9,0],[0,20,0],[0,20,0],[0,5,15]],[[2,18,0],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,20,0],[0,20,0],[10,10,0],[0,20,0],[0,20,0]],[[0,20,0],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,20,0],[0,20,0],[0,20,0],[0,20,0]],[[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,20,0],[0,20,0]],[[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,20,0]]]},"HJ":{"summary":[8.5,48.4,43.1],"cells":[[[20,0,0],[20,0,0],[20,0,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[11,9,0],[0,20,0],[0,20,0],[0,20,0]],[[20,0,0],[20,0,0],[0,20,0],[20,0,0],[5,15,0],[20,0,0],[0,20,0],[0,20,0],[9,11,0],[0,20,0],[6,14,0],[0,20,0],[0,20,0]],[[13,7,0],[0,20,0],[20,0,0],[19,1,0],[0,20,0],[8,12,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0]],[[0,20,0],[6,14,0],[0,20,0],[20,0,0],[20,0,0],[20,0,0],[3,17,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0]],[[2,18,0],[0,20,0],[0,20,0],[0,20,0],[8,12,0],[20,0,0],[6,14,0],[2,18,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0]],[[2,18,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[4,16,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0]],[[0,20,0],[0,20,0],[0,0,20],[0,0,20],[0,20,0],[0,20,0],[0,20,0],[13,7,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0]],[[0,20,0],[0,20,0],[0,0,20],[0,0,20],[0,0,20],[0,20,0],[0,20,0],[0,20,0],[20,0,0],[0,20,0],[0,20,0],[0,20,0],[0,0,20]],[[0,20,0],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,12,8],[0,20,0],[0,20,0],[12,8,0],[0,20,0],[0,20,0],[0,20,0]],[[8,12,0],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,20,0],[0,20,0],[10,10,0],[0,20,0],[0,20,0]],[[0,20,0],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,20,0],[0,20,0],[0,20,0],[0,20,0]],[[2,18,0],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,20,0],[0,20,0]],[[0,1,19],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,20,0]]]},"CO":{"summary":[10.5,53.3,36.2],"cells":[[[20,0,0],[20,0,0],[20,0,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[12,8,0],[0,20,0],[0,20,0],[0,20,0]],[[20,0,0],[20,0,0],[20,0,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[11,9,0],[4,16,0],[2,18,0],[0,20,0],[0,20,0]],[[20,0,0],[5,15,0],[20,0,0],[10,10,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0]],[[0,20,0],[3,17,0],[1,19,0],[20,0,0],[20,0,0],[20,0,0],[14,6,0],[7,13,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0]],[[0,20,0],[2,18,0],[0,20,0],[8,12,0],[20,0,0],[20,0,0],[20,0,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0]],[[0,20,0],[7,13,0],[0,20,0],[0,20,0],[0,20,0],[2,18,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0]],[[2,18,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[2,18,0],[19,1,0],[5,15,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0]],[[2,18,0],[0,20,0],[0,8,12],[0,0,20],[0,0,20],[0,20,0],[0,20,0],[0,20,0],[20,0,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0]],[[0,20,0],[0,20,0],[0,6,14],[0,0,20],[0,0,20],[0,0,20],[0,20,0],[0,20,0],[0,20,0],[9,11,0],[0,20,0],[0,20,0],[0,20,0]],[[15,5,0],[0,20,0],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,2,18],[0,20,0],[0,20,0],[16,4,0],[0,20,0],[0,20,0]],[[0,20,0],[0,15,5],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,20,0],[0,20,0],[0,20,0],[0,20,0]],[[0,20,0],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,10,10],[0,0,20],[0,20,0],[0,20,0]],[[0,20,0],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,20,0]]]},"BTN":{"summary":[15.0,61.6,23.5],"cells":[[[20,0,0],[20,0,0],[20,0,0],[20,0,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[6,14,0],[11,9,0],[0,20,0],[0,20,0]],[[20,0,0],[20,0,0],[20,0,0],[11,9,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0]],[[20,0,0],[18,2,0],[20,0,0],[9,11,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0]],[[20,0,0],[0,20,0],[0,20,0],[20,0,0],[1,19,0],[0,20,0],[0,20,0],[10,10,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0]],[[0,20,0],[7,13,0],[0,20,0],[14,6,0],[20,0,0],[20,0,0],[20,0,0],[20,0,0],[7,13,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0]],[[0,20,0],[4,16,0],[0,20,0],[4,16,0],[6,14,0],[20,0,0],[20,0,0],[19,1,0],[4,16,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0]],[[0,20,0],[0,20,0],[0,20,0],[1,19,0],[0,20,0],[0,20,0],[0,20,0],[20,0,0],[17,3,0],[4,16,0],[0,20,0],[0,20,0],[0,20,0]],[[0,20,0],[0,20,0],[0,20,0],[2,18,0],[0,20,0],[0,20,0],[0,20,0],[2,18,0],[20,0,0],[1,19,0],[0,20,0],[0,20,0],[0,20,0]],[[0,20,0],[9,11,0],[0,20,0],[0,20,0],[0,11,9],[0,20,0],[0,20,0],[0,20,0],[3,17,0],[20,0,0],[9,11,0],[0,20,0],[0,20,0]],[[14,6,0],[7,13,0],[0,20,0],[0,11,9],[0,0,20],[0,0,20],[0,0,20],[0,20,0],[0,20,0],[0,20,0],[20,0,0],[0,20,0],[0,20,0]],[[1,19,0],[0,20,0],[0,20,0],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,20,0],[0,20,0],[0,20,0],[7,13,0],[0,20,0]],[[0,20,0],[0,20,0],[0,20,0],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,20,0],[0,0,20],[0,20,0],[0,20,0]],[[0,20,0],[0,20,0],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,20,0]]]},"SB":{"summary":[11.6,50.6,37.8],"cells":[[[20,0,0],[20,0,0],[20,0,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0]],[[20,0,0],[20,0,0],[20,0,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0]],[[17,3,0],[0,20,0],[20,0,0],[8,12,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0]],[[4,16,0],[7,13,0],[0,20,0],[20,0,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[1,19,0]],[[0,20,0],[1,19,0],[0,20,0],[0,20,0],[14,6,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0]],[[0,20,0],[2,18,0],[0,20,0],[10,10,0],[5,15,0],[0,20,0],[2,18,0],[0,20,0],[0,20,0],[0,20,0],[0,20,0],[1,19,0],[0,20,0]],[[0,20,0],[0,20,0],[0,20,0],[7,13,0],[0,20,0],[2,18,0],[0,20,0],[13,7,0],[0,20,0],[0,20,0],[3,17,0],[0,0,20],[0,0,20]],[[0,20,0],[0,20,0],[4,1,15],[1,12,7],[13,7,0],[1,13,6],[0,20,0],[0,20,0],[12,8,0],[0,20,0],[0,20,0],[0,20,0],[0,0,20]],[[15,5,0],[8,12,0],[4,3,13],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,20,0],[5,15,0],[0,20,0],[0,20,0],[0,20,0],[0,0,20]],[[5,15,0],[12,8,0],[3,7,10],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,20,0],[0,20,0],[7,13,0],[0,20,0],[0,20,0]],[[0,20,0],[9,0,11],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,15,5],[0,20,0],[0,20,0],[0,20,0]],[[5,15,0],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,20,0],[0,20,0]],[[11,9,0],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,0,20],[0,20,0]]]}};
+const spotHands={"UTG":["AJs","A5s","KTs","K9o","76o"],"UTG+1":["ATs","A3s","KTs","97o","76s"],"LJ":["AQs","K6s","JJ","Q9o","92s","76s"],"HJ":["A5s","K6s","QJs","ATo","86o","65s","A2o"],"CO":["A5s","K6s","QJs","J8s","Q7o","A5o","K4o","53o"],"BTN":["A5s","A4s","KQo","QJs","JTs","J7s","KTo","JTo","T6o","86s","77","K6o","J5o","A5o"],"SB":["AQo","QJs","Q7o","J7o","K4o"]};
+const spotCounts={UTG:5,"UTG+1":5,LJ:6,HJ:7,CO:8,BTN:14,SB:5};
+// Chunk 2: 50 NEW spots, deliberately chosen from the same seven supplied BB-vs-RFI charts.
+// No hand/position pair is repeated from Chunk 1. Mixed cells remain frequency-aware.
+const spotHands2={
+  "UTG":["ATs","AKo","KQs","QQ","T5s","T8o","54o"],
+  "UTG+1":["A5s","AKo","KJs","JTs","T9s","98s","ATo"],
+  "LJ":["KQs","AQo","J9s","98o","65s","97o","54s"],
+  "HJ":["KTs","AQo","TT","T8s","87s","A9o","A3o"],
+  "CO":["KQo","KJo","JTo","99","86s","Q6o","54s"],
+  "BTN":["KJs","K9o","J9o","97s","66","64s","K5o","43s","A4o","T9o"],
+  "SB":["AJo","KJo","J9o","T9o","97o"]
+};
+const spotCounts2={UTG:7,"UTG+1":7,LJ:7,HJ:7,CO:7,BTN:10,SB:5};
+const spotHands3={
+  "UTG":["A3s","KJs","K6s","QTs","AJo","JTs","87o"],
+  "UTG+1":["K6s","QTs","AJo","87s","65s","A5o","54s"],
+  "LJ":["A5s","ATo","98s","87s","86o","76o","62s","A5o"],
+  "HJ":["K4s","Q9s","KJo","J8s","T7s","98s","A5o","54s"],
+  "CO":["K5s","K4s","QJo","J7s","KTo","K9o","A8o","88"],
+  "BTN":["T6s","96s","J8o","85s","J7o","75s"],
+  "SB":["J2s","KTo","TT","K9o","Q6o","Q5o"]
+};
+const spotCounts3={UTG:7,"UTG+1":7,LJ:8,HJ:8,CO:8,BTN:6,SB:6};
+const totalChunk3=50;
+const totalChunk2=50;
+const roadmap=[
+["Day 1","Chunk 1 — BB vs RFI: 50 spots","LIVE / completed when all 50 decisions are answered."],
+["Day 2","Chunk 2 — BB vs RFI: 50 new spots","LIVE / second 50-spot precision drill using the same supplied charts."],
+["Day 3","Chunk 3 — Mixed Strategy Mastery: 50 spots","LIVE / 50 mixed Raise-Call-Fold spots selected directly from the supplied charts."],
+["Day 4","BB defence sizing","Planned — response to different open sizes."],
+["Day 5","BB defence 3-bets","Planned — value/bluff composition."],
+["Day 6","BB defence suited hands","Planned — suited connectivity and playability."],
+["Day 7","Week 1 review","Planned — error pattern review."],
+["Day 8","BTN vs BB flop ranges","Planned — postflop transition."],
+["Day 9","C-betting dry boards","Planned — board texture."],
+["Day 10","C-betting connected boards","Planned — equity interaction."],
+["Day 11","Check-backs","Planned — range protection."],
+["Day 12","Turn barrels","Planned — turn pressure."],
+["Day 13","Turn sizing","Planned — sizing discipline."],
+["Day 14","Week 2 review","Planned — postflop review."],
+["Day 15","River value betting","Planned — thin value."],
+["Day 16","River bluffing","Planned — blocker logic."],
+["Day 17","Bluff catching","Planned — bluff/value ratios."],
+["Day 18","River bet sizing","Planned — polar sizing."],
+["Day 19","Stack depth 50bb","Planned — deeper tournament play."],
+["Day 20","Stack depth 30bb","Planned — medium stacks."],
+["Day 21","Week 3 review","Planned — stack-depth errors."],
+["Day 22","20–25bb tournament play","Planned — reshove and pressure."],
+["Day 23","15bb tournament play","Planned — push/fold transition."],
+["Day 24","10bb tournament play","Planned — survival and leverage."],
+["Day 25","ICM basics","Planned — chip EV vs ICM."],
+["Day 26","Bubble decisions","Planned — risk premium."],
+["Day 27","Final-table pressure","Planned — payout-aware decisions."],
+["Day 28","Exploitative adjustments","Planned — population tendencies."],
+["Day 29","Live tournament adjustments","Planned — live-specific dynamics."],
+["Day 30","30-day assessment","Planned — identify next training block."]
 ];
 
-const lesson30=[
- {d:1,t:"Big Blind Defence — vs BTN",m:"Preflop",p:"Learn to defend the BB without guessing. Focus on price, position and hand playability."},
- {d:2,t:"Big Blind Defence — hand classes",m:"Preflop",p:"Sort hands into easy calls, close calls and clear folds."},
- {d:3,t:"Big Blind Defence — sizing",m:"Preflop",p:"See how the opener's size changes your defending range."},
- {d:4,t:"Big Blind Defence — 3-bets",m:"Preflop",p:"Build a simple value/bluff 3-bet framework from the BB."},
- {d:5,t:"Big Blind Defence — suited hands",m:"Preflop",p:"Understand why suitedness and connectivity matter."},
- {d:6,t:"Big Blind Defence — offsuit hands",m:"Preflop",p:"Spot dominated offsuit hands that look prettier than they are."},
- {d:7,t:"Week 1 review",m:"Review",p:"Re-test the first six concepts and identify your biggest leak."},
- {d:8,t:"BTN vs BB — flop ranges",m:"Postflop",p:"Start thinking range-versus-range instead of hand-versus-hand."},
- {d:9,t:"C-betting dry boards",m:"Postflop",p:"Learn why small bets are common on favourable dry textures."},
- {d:10,t:"C-betting connected boards",m:"Postflop",p:"Recognise boards where equity shifts more dramatically."},
- {d:11,t:"Check-backs",m:"Postflop",p:"Learn when checking protects your range and realises equity."},
- {d:12,t:"Turn barrels",m:"Postflop",p:"Barrel good cards; slow down when the turn helps the defender."},
- {d:13,t:"Turn sizing",m:"Postflop",p:"Connect bet size to the range you represent."},
- {d:14,t:"Week 2 review",m:"Review",p:"Mix BB defence and flop/turn decisions."},
- {d:15,t:"River value betting",m:"Postflop",p:"Ask the key question: what worse hands call?"},
- {d:16,t:"River bluffing",m:"Postflop",p:"Choose bluffs using blockers, missed draws and range logic."},
- {d:17,t:"Bluff catching",m:"Postflop",p:"Estimate how many credible bluffs reach the river."},
- {d:18,t:"River bet sizing",m:"Postflop",p:"Understand polar sizing and why bigger bets need stronger ranges."},
- {d:19,t:"Stack depth — 50bb",m:"Tournament",p:"See how deeper stacks change postflop leverage."},
- {d:20,t:"Stack depth — 30bb",m:"Tournament",p:"Adjust opens, 3-bets and postflop plans."},
- {d:21,t:"Week 3 review",m:"Review",p:"Consolidate river and stack-depth decisions."},
- {d:22,t:"20–25bb tournament play",m:"Tournament",p:"Understand raise/fold, raise/call and reshove pressure."},
- {d:23,t:"15bb tournament play",m:"Tournament",p:"Build practical short-stack decisions without autopilot."},
- {d:24,t:"10bb tournament play",m:"Tournament",p:"Learn the basics of open-jamming and calling jams."},
- {d:25,t:"ICM basics",m:"Tournament",p:"Understand why chip EV and money EV can diverge."},
- {d:26,t:"Bubble decisions",m:"Tournament",p:"Apply risk premium to marginal calls and jams."},
- {d:27,t:"Final-table pressure",m:"Tournament",p:"Use stack distributions and payout pressure intelligently."},
- {d:28,t:"Exploitative adjustments",m:"Exploit",p:"Turn reliable population reads into practical deviations."},
- {d:29,t:"Live tournament adjustments",m:"Exploit",p:"Use physical pace, sizing and observed tendencies carefully."},
- {d:30,t:"30-day assessment",m:"Review",p:"Complete a mixed decision set and choose the next training block."}
-];
-
-const day1Spots=[
- {h:"100bb effective · BTN opens 2.5bb\nHero: BB · K♠7♠\nPot: 3.5bb before your action",q:"How many chips do you put in?",opts:["0","1.5","7.5","10"],a:1,g:"Call 1.5bb",gto:"GTO-style benchmark: this is a standard BB defend versus a small BTN open. The exact mix depends on the opening range and rake/model assumptions.",p:"Big principle: you are getting a good price, but you are out of position. Suited hands gain value because they realise equity better than many offsuit hands."},
- {h:"100bb effective · BTN opens 2.5bb\nHero: BB · 8♠4♠\nPot: 3.5bb before your action",q:"How many chips do you put in?",opts:["0","1.5","7.5","10"],a:1,g:"Call 1.5bb",gto:"GTO-style benchmark: calling is generally attractive with many suited, connected and playable hands against a small BTN size.",p:"Other factor: reverse implied odds matter. Weak offsuit hands can be much worse than their raw equity suggests."},
- {h:"100bb effective · BTN opens 2.5bb\nHero: BB · A♣5♣\nPot: 3.5bb before your action",q:"How many chips do you put in?",opts:["0","1.5","8","12"],a:2,g:"3-bet to 8bb",gto:"GTO-style benchmark: suited wheel aces are useful 3-bet candidates because they have strong blockers and can make nutted hands.",p:"Other factor: versus a player who folds too much to 3-bets, this hand can gain extra value from aggression."},
- {h:"100bb effective · BTN opens 2.5bb\nHero: BB · Q♥2♣\nPot: 3.5bb before your action",q:"How many chips do you put in?",opts:["0","1.5","8","12"],a:0,g:"Fold",gto:"GTO-style benchmark: many weak offsuit hands are folds even from the BB. A cheap price does not make every hand profitable.",p:"Other factor: dominated hands suffer when you make a pair. Avoid defending just because you are 'priced in'."},
- {h:"100bb effective · BTN opens 3.5bb\nHero: BB · J♠9♠\nPot: 4.5bb before your action",q:"How many chips do you put in?",opts:["0","2.5","10.5","14"],a:1,g:"Call 2.5bb",gto:"GTO-style benchmark: the larger open reduces the price, but J9s remains a highly playable suited hand in many BB-vs-BTN ranges.",p:"Other factor: if the opener is unusually tight, tighten your defence; if they are very wide, you can defend wider."},
- {h:"100bb effective · BTN opens 2.5bb\nHero: BB · A♥K♦\nPot: 3.5bb before your action",q:"How many chips do you put in?",opts:["0","1.5","8","12"],a:2,g:"3-bet to 8bb",gto:"GTO-style benchmark: AK is a premium 3-bet/value hand. Keeping pressure on a wide BTN range is valuable.",p:"Other factor: against a very aggressive 4-bettor, your 3-bet strategy may mix sizes and frequencies."},
- {h:"100bb effective · BTN opens 2.5bb\nHero: BB · 6♣2♦\nPot: 3.5bb before your action",q:"How many chips do you put in?",opts:["0","1.5","8","12"],a:0,g:"Fold",gto:"GTO-style benchmark: weak offsuit low cards are commonly folds despite the attractive pot odds.",p:"Other factor: playability and domination are key. You want hands that can continue profitably after the flop."},
- {h:"100bb effective · BTN opens 2.5bb\nHero: BB · T♣8♣\nPot: 3.5bb before your action",q:"How many chips do you put in?",opts:["0","1.5","7.5","10"],a:1,g:"Call 1.5bb",gto:"GTO-style benchmark: T8s is the type of suited connector that benefits from defending a lot versus late-position opens.",p:"Other factor: suited connectors perform better deeper because they can win larger pots when they make strong draws or disguised hands."},
- {h:"100bb effective · BTN opens 2.5bb\nHero: BB · 9♦3♣\nPot: 3.5bb before your action",q:"How many chips do you put in?",opts:["0","1.5","8","12"],a:0,g:"Fold",gto:"GTO-style benchmark: many weak offsuit one-gappers are simply folds. The BB is not a licence to defend everything.",p:"Other factor: rake, opponent skill and postflop edge can shift the threshold in real games."},
- {h:"100bb effective · BTN opens 2.5bb\nHero: BB · 7♥5♥\nPot: 3.5bb before your action",q:"How many chips do you put in?",opts:["0","1.5","7.5","10"],a:1,g:"Call 1.5bb",gto:"GTO-style benchmark: suited connected hands tend to defend well against small late-position opens.",p:"Other factor: your postflop skill matters. A hand that is theoretically defendable can become less attractive if you consistently struggle out of position."}
-];
-
-const examples=[
-
-{t:"Example 1 — C-bet on a dry king-high flop",s:"30bb effective · BTN vs BB",h:"BTN opens 2.2bb with A♠7♠\nBB calls\nFlop: K♦ 8♣ 3♥\nPot: ~4.9bb · BB checks",q:"What is the best practical plan?",o:["Always check because A-high missed","Use a small bet at a high frequency, while keeping some checks","Bet 75–100% pot with almost your whole range","Shove"],a:1,e:"BTN has a useful range advantage on this relatively dry K-high board. A small sizing can apply pressure cheaply. This is a simplified training rule—not a claim that every solver uses one exact frequency."},
-{t:"Example 2 — River value bet",s:"40bb effective · BTN vs BB",h:"BTN opens, BB calls\nFlop: Q♠ 7♦ 2♣ — bet/call\nTurn: 7♠ — check/check\nRiver: 4♥\nBTN: A♠Q♦",q:"Should you consider a value bet?",o:["Yes, because worse Qx/7x-type bluff-catchers and pairs may call depending on ranges","No, top pair can never value bet river","Only if you are certain villain has a flush draw","Shove automatically"],a:0,e:"Start with the calling range: what worse hands can plausibly pay you? The correct size and frequency depend on the exact ranges and population. The key skill is identifying realistic worse calls."},
-{t:"Example 3 — Missed draw does not mean bluff",s:"25bb effective · BB vs BTN",h:"BTN opens, BB calls with 9♠8♠\nFlop: K♠ 7♦ 2♠\nTurn: 4♥\nRiver: K♦\nBB checks to BTN",q:"You miss the flush/straight possibilities. What should drive a river bluff?",o:["The fact that you missed","Whether your hand blocks calls/value and whether villain's range can fold","The size of the pot alone","Whether you lost the previous hand"],a:1,e:"Bluffing is a range decision. Blockers, your value combinations, villain's likely range and population tendencies all matter."},
-{t:"Example 4 — 15bb tournament decision",s:"15bb effective · CO first in",h:"9-max MTT · 15bb\nYou are CO with A♠5♠\nPlayers behind include BTN, SB, BB",q:"What is the right way to approach the decision?",o:["Treat it like a 100bb cash game hand","Consider stack depth, position, fold equity and reshove risk","Always limp because the stack is short","Always fold suited aces"],a:1,e:"At 15bb, raise/fold, open-jam, and raise/call dynamics become materially different. Exact ranges depend on antes, payout stage and player pool."},
-{t:"Example 5 — Bubble ICM",s:"Near bubble · 12bb",h:"20 players remain, 18 paid\nYou have 12bb, a big stack opens from CO, you are BTN\nYou hold a marginal calling hand",q:"What changes?",o:["Nothing; chip EV is always identical to money EV","ICM can make marginal calls less attractive because losing chips can cost more than gaining them is worth","You should call everything to survive","You should never play a hand near the bubble"],a:1,e:"Near the bubble, risk premium can make marginal chip-EV calls unattractive. Stack distributions, payouts and ranges matter; don't reduce ICM to 'fold everything'."},
-{t:"Example 6 — Exploit a calling station",s:"Live low-stakes MTT · 50bb",h:"Villain has shown several weak calls to large river bets\nYou value bet top pair on a safe river",q:"What is a useful exploit?",o:["Bluff more because they hate big bets","Value bet thinner and often choose sizes that extract from their calling range","Stop betting because they call too much","Only bet the nuts"],a:1,e:"Against a player who demonstrably calls too wide, shift toward value. The observation must be based on actual evidence, not a stereotype."}
-];
-
-let S=JSON.parse(localStorage.getItem("pc_pwa_v2")||"null")||{day:1,done:[],ans:{},lessonAns:{},hands:[],notes:"",exDone:[]}; S.lessonAns=S.lessonAns||{};
-function save(){localStorage.setItem("pc_pwa_v2",JSON.stringify(S));render()}
-function page(p){document.querySelectorAll("main section").forEach(x=>x.classList.add("hidden"));document.getElementById(p).classList.remove("hidden");document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===p)); if(p==="today")renderToday();if(p==="train")renderTrain();if(p==="review")renderReview();if(p==="progress")renderProgress()}
+const savedV6=localStorage.getItem("pc_pwa_v6");
+const savedV5=localStorage.getItem("pc_pwa_v5");
+const savedV4=localStorage.getItem("pc_pwa_v4");
+let S=JSON.parse(savedV6||savedV5||savedV4||"null")||{day:1,spot:0,spot2:0,spot3:0,answers:{},answers2:{},answers3:{},done:[],hands:[],notes:"",exDone:[]};
+S.spot2=S.spot2||0; S.spot3=S.spot3||0; S.answers2=S.answers2||{}; S.answers3=S.answers3||{}; S.done=S.done||[]; S.answers=S.answers||{}; S.hands=S.hands||[]; S.notes=S.notes||"";
+function save(){localStorage.setItem("pc_pwa_v6",JSON.stringify(S))}
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","\'":"&#039;"}[m]))}
+function page(p){document.querySelectorAll("main section").forEach(x=>x.classList.add("hidden"));document.getElementById(p).classList.remove("hidden");document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===p));if(p==="today")renderToday();if(p==="train")renderTrain();if(p==="review")renderReview();if(p==="progress")renderProgress();window.scrollTo(0,0)}
 document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>page(b.dataset.page));
-function qForDay(d){let ex=examples[(d-1)%examples.length];return ex}
-function parseCards(str){const suits={♠:'black',♣:'black',♥:'red',♦:'red'};return (str.match(/[AKQJT2-9][♠♣♥♦]/g)||[]).map(c=>({r:c[0],s:c[1],cls:suits[c[1]]}));}
-function cardMarkup(cards){return cards.map(c=>`<div class="playing-card ${c.cls}"><div>${c.r}</div><div class="suit">${c.s}</div></div>`).join('')}
-function spotVisual(spot){const lines=spot.h.split('\n'); const hero=(lines.find(x=>x.includes('Hero:'))||'').replace('Hero: ',''); const cards=parseCards(hero); const pot=(lines.find(x=>x.startsWith('Pot:'))||''); const pre=lines.filter(x=>!x.includes('Hero:')&&!x.startsWith('Pot:')).join(' · '); return `<div class="poker-table"><div class="table-top">TOURNAMENT PRACTICE TABLE · ${esc((lines[0]||'').split("·")[0]||'100bb effective')}</div><div class="seat-row"><span>BTN</span><span>SB</span><span>BB · HERO</span></div><div class="action-line">${esc(pre)}</div><div class="cards">${cardMarkup(cards)}</div><div class="pot-line">${esc(pot)}</div><div class="table-hint">Choose your chip amount below</div></div>`}
+
+function handPos(h){
+  let r=RANKS.indexOf(h[0]),c=RANKS.indexOf(h[1]);
+  if(h.length===2)return [r,c];
+  if(h[2]==="o")return [c,r];
+  return [r,c];
+}
+function freqFor(pos,h){let [r,c]=handPos(h);return charts[CHART_KEY[pos]].cells[r][c].map(x=>x*5)}
+function actionName(i){return ["Raise","Call","Fold"][i]}
+function strategyText(freq){return ["Raise","Call","Fold"].map((x,i)=>`${x} ${freq[i]}%`).join(" · ")}
+function dominant(freq){return freq.indexOf(Math.max(...freq))}
+function mixed(freq){return freq.filter(x=>x>0).length>1}
+function scoreFor(selected,freq){return freq[selected]||0}
+
+function renderRangeChart(pos){
+  const ch=charts[CHART_KEY[pos]];
+  const heads=RANKS.map(r=>`<div>${r}</div>`).join("");
+  const cells=[];
+  for(let r=0;r<13;r++)for(let c=0;c<13;c++){
+    const f=ch.cells[r][c].map(x=>x*5);
+    const label=handLabel(r,c);
+    const style=`background:conic-gradient(from 0deg,var(--raise) 0 ${f[0]}%,var(--call) ${f[0]}% ${f[0]+f[1]}%,var(--fold) ${f[0]+f[1]}% 100%)`;
+    cells.push(`<div class="range-cell ${mixed(f)?'mix':''}" style="${style}" title="${label}: Raise ${f[0]}%, Call ${f[1]}%, Fold ${f[2]}%" onclick="showCell('${pos}',${r},${c})">${label}</div>`);
+  }
+  const bar=`<div class="summarybar"><i style="width:${ch.summary[0]}%"></i><i style="width:${ch.summary[1]}%"></i><i style="width:${ch.summary[2]}%"></i></div>`;
+  return `<div class="range-tabs">${POSITIONS.map(p=>`<button class="${p===pos?'active':''}" onclick="setChart('${p}')">${p}</button>`).join("")}</div>
+  <div class="summary"><div class="raise">Raise ${ch.summary[0]}%</div><div class="call">Call ${ch.summary[1]}%</div><div class="fold">Fold ${ch.summary[2]}%</div></div>${bar}
+  <div class="legend"><span class="raise">Red = Raise</span><span class="call">Green = Call</span><span class="fold">Blue = Fold</span></div>
+  <div class="range-wrap" style="margin-top:10px"><div class="range-head">${heads}</div><div class="range-grid">${cells.join("")}</div></div>
+  <div id="cell-detail" class="chart-note">Tap any cell to see its preserved mix. Split cells are intentionally mixed — they are not rounded to a single action.</div>`;
+}
+let chartPos="BTN";
+function setChart(pos){chartPos=pos;document.getElementById("chartbox").innerHTML=renderRangeChart(pos)}
+function showCell(pos,r,c){
+  const f=charts[CHART_KEY[pos]].cells[r][c].map(x=>x*5), h=handLabel(r,c);
+  document.getElementById("cell-detail").innerHTML=`<b>${h} vs ${pos}</b> — Raise ${f[0]}% · Call ${f[1]}% · Fold ${f[2]}%. ${mixed(f)?"Mixed strategy preserved. Any action with a non-zero frequency is part of the reference strategy.":"Pure reference action: "+actionName(dominant(f))+"."}`;
+}
+function handLabel(r,c){if(r===c)return RANKS[r]+RANKS[c];if(r<c)return RANKS[r]+RANKS[c]+"s";return RANKS[c]+RANKS[r]+"o"}
+
+
+function spotList(){
+  const list=[];
+  POSITIONS.forEach(pos=>spotHands[pos].forEach(h=>list.push({pos,h})));
+  return list;
+}
+function spotList2(){
+  const list=[];
+  POSITIONS.forEach(pos=>spotHands2[pos].forEach(h=>list.push({pos,h})));
+  return list;
+}
+function spotList3(){const list=[]; POSITIONS.forEach(pos=>spotHands3[pos].forEach(h=>list.push({pos,h}))); return list;}
+const spots=spotList(), spots2=spotList2(), spots3=spotList3();
+
+function cardMarkup(hand){
+  const suits=hand.endsWith("s")?["♠","♠"]:hand.endsWith("h")?["♥","♥"]:hand.endsWith("d")?["♦","♦"]:["♠","♦"];
+  const ranks=hand.slice(0,2);
+  return `<div class="playing-card ${suits[0]==="♥"||suits[0]==="♦"?'red':''}"><div>${ranks[0]}</div><div class="suit">${suits[0]}</div></div><div class="playing-card ${suits[1]==="♥"||suits[1]==="♦"?'red':''}"><div>${ranks[1]}</div><div class="suit">${suits[1]}</div></div>`;
+}
+function spotCard(spot,i,answers){
+  const f=freqFor(spot.pos,spot.h), ans=answers[i], submitted=ans!==undefined;
+  const result=submitted?scoreFor(ans,f):null;
+  const tone=submitted?(result>0?"good":"bad"):"";
+  const buttons=["Raise (3-bet)","Call","Fold"].map((x,j)=>`<button class="chip ${ans===j?'sel':''}" onclick="answerCurrent(${i},${j})" ${submitted?'disabled':''}>${x}</button>`).join("");
+  const feedback=submitted?`<div class="feedback ${tone}"><b>${result>0?"Strategically valid action.":"Not in the supplied reference strategy."}</b><div class="explain"><p><b>Reference frequency:</b> ${strategyText(f)}</p><p><b>Strategy fit:</b> ${result}%</p><p>${mixed(f)?"Mixed cell: multiple actions are intentionally part of the strategy. Your score reflects the selected action's reference frequency.":"Pure cell: the supplied chart assigns the strategy to one action."}</p></div></div>`:"";
+  return `<div class="card"><div class="section-title"><h3>Spot ${i+1} of 50</h3><span class="pill">${spot.pos} · 100bb</span></div>
+  <div class="poker-table"><div class="table-top">TOURNAMENT 8-MAX · 100BB · BB VS RFI</div><div class="action-line"><b>${spot.pos}</b> opens · Hero is BB</div><div class="cards">${cardMarkup(spot.h)}</div><div class="pot-line">Hero hand: ${spot.h}</div></div>
+  <div class="spot-meta"><span class="pill">Position: BB</span><span class="pill">Opponent: ${spot.pos}</span><span class="pill">Action: vs RFI</span><span class="pill">Stack: 100bb</span></div>
+  <p style="margin-top:14px"><b>Your action?</b></p><div class="chiprow">${buttons}</div>${feedback}
+  ${submitted?`<div class="freqline"><span class="freq r">Raise ${f[0]}%</span><span class="freq c">Call ${f[1]}%</span><span class="freq f">Fold ${f[2]}%</span></div>`:""}</div>`;
+}
+function renderDay1(){
+  const answered=Object.keys(S.answers).length;
+  const score=Object.entries(S.answers).reduce((sum,[i,a])=>sum+scoreFor(+a,freqFor(spots[+i].pos,spots[+i].h)),0);
+  const avg=answered?Math.round(score/answered):0;
+  const i=Math.min(S.spot,spots.length-1), spot=spots[i];
+  document.getElementById("header").textContent=`Day 1/30 · ${answered}/${spots.length} spots · ${avg}% strategy fit`;
+  document.getElementById("today").innerHTML=`<div class="card hero"><div class="kicker">Day 1 · Preflop · Chunk 1</div><div class="title">BB Defence vs RFI — 50 Spot Drill</div>
+  <p class="muted">Chunk 1 uses the seven BB-vs-RFI charts you supplied. Mixed cells stay mixed; scoring uses the preserved frequency rather than forcing one answer.</p>
+  <div class="grid"><div class="stat"><span class="tiny">Completed</span><b>${answered}/50</b></div><div class="stat"><span class="tiny">Strategy fit</span><b>${answered?avg+"%":"—"}</b></div></div>
+  <div style="margin-top:13px"><div class="tiny">Today's progress</div><div class="bar"><i style="width:${answered/50*100}%"></i></div></div>
+  <div class="sourcebox"><b>Accuracy note:</b> Aggregate Raise/Call/Fold percentages are copied from the supplied charts; UTG+1 is mapped to the supplied UTG+1 chart. Individual split-cell frequencies are represented in 5% increments from the visible chart mix so mixed strategies are preserved rather than collapsed.</div></div>
+  <div class="card"><div class="section-title"><h3>Reference range chart</h3><span class="pill">${chartPos}</span></div><div id="chartbox">${renderRangeChart(chartPos)}</div></div>
+  ${spotCard(spot,i,S.answers)}
+  <div class="card"><div class="section-title"><b>50-spot route</b><span class="pill">${Object.values(spotCounts).join(" + ")} = 50</span></div><div class="muted">UTG 5 · UTG+1 5 · LJ 6 · HJ 7 · CO 8 · BTN 14 · SB 5</div><div class="nextbar"><button class="btn secondary" onclick="prevSpot()" ${i===0?'disabled':''}>← Previous</button><span class="tiny">Spot ${i+1}/50</span><button class="btn" onclick="nextSpot()" ${i>=49?'disabled':''}>Next →</button></div></div>
+  <div class="card"><div class="section-title"><h3>Finish Chunk 1</h3><span class="pill">${answered}/50</span></div><p class="muted">Complete all 50 Chunk 1 spots before moving to Chunk 2.</p><button class="btn" onclick="completeDay1()" ${answered<50?'disabled':''}>Complete Day 1</button></div>`;
+}
+function renderDay2(){
+  const answered=Object.keys(S.answers2).length;
+  const score=Object.entries(S.answers2).reduce((sum,[i,a])=>sum+scoreFor(+a,freqFor(spots2[+i].pos,spots2[+i].h)),0);
+  const avg=answered?Math.round(score/answered):0;
+  const i=Math.min(S.spot2,spots2.length-1), spot=spots2[i];
+  document.getElementById("header").textContent=`Day 2/30 · ${answered}/50 spots · ${avg}% strategy fit`;
+  document.getElementById("today").innerHTML=`<div class="card hero"><div class="kicker">Day 2 · Preflop · Chunk 2</div><div class="title">BB Defence vs RFI — 50 New Spots</div>
+  <p class="muted">No hand/position pair from Chunk 1 is repeated. This block deliberately includes mixed cells so you practise frequency-aware decisions, not memorised pure labels.</p>
+  <div class="grid"><div class="stat"><span class="tiny">Completed</span><b>${answered}/50</b></div><div class="stat"><span class="tiny">Strategy fit</span><b>${answered?avg+"%":"—"}</b></div></div>
+  <div style="margin-top:13px"><div class="tiny">Chunk 2 progress</div><div class="bar"><i style="width:${answered/50*100}%"></i></div></div>
+  <div class="sourcebox"><b>Accuracy note:</b> These spots use the same seven supplied BB-vs-RFI charts. Split cells are preserved as mixed strategies; the displayed per-cell frequencies use the chart-derived 5% increments already used in Chunk 1.</div></div>
+  <div class="card"><div class="section-title"><h3>Reference range chart</h3><span class="pill">${chartPos}</span></div><div id="chartbox">${renderRangeChart(chartPos)}</div></div>
+  ${spotCard(spot,i,S.answers2)}
+  <div class="card"><div class="section-title"><b>Chunk 2 route</b><span class="pill">${Object.values(spotCounts2).join(" + ")} = 50</span></div><div class="muted">UTG 7 · UTG+1 7 · LJ 7 · HJ 7 · CO 7 · BTN 10 · SB 5</div><div class="nextbar"><button class="btn secondary" onclick="prevSpot2()" ${i===0?'disabled':''}>← Previous</button><span class="tiny">Spot ${i+1}/50</span><button class="btn" onclick="nextSpot2()" ${i>=49?'disabled':''}>Next →</button></div></div>
+  <div class="card"><div class="section-title"><h3>Finish Chunk 2</h3><span class="pill">${answered}/50</span></div><p class="muted">Complete all 50 new spots to unlock Day 3.</p><button class="btn" onclick="completeDay2()" ${answered<50?'disabled':''}>Complete Day 2</button></div>`;
+}
+function renderDay3(){
+  const answered=Object.keys(S.answers3).length;
+  const score=Object.entries(S.answers3).reduce((sum,[i,a])=>sum+scoreFor(+a,freqFor(spots3[+i].pos,spots3[+i].h)),0);
+  const avg=answered?Math.round(score/answered):0;
+  const i=Math.min(S.spot3,spots3.length-1), spot=spots3[i];
+  document.getElementById("header").textContent=`Day 3/30 · ${answered}/50 mixed spots · ${avg}% strategy fit`;
+  document.getElementById("today").innerHTML=`<div class="card hero"><div class="kicker">Day 3 · Preflop · Chunk 3</div><div class="title">Mixed Strategy Mastery — 50 Spots</div>
+  <p class="muted">Every spot in this block comes from a cell that mixes at least two actions in the supplied reference chart. The goal is to stop treating poker as binary when the reference strategy is intentionally mixed.</p>
+  <div class="grid"><div class="stat"><span class="tiny">Completed</span><b>${answered}/50</b></div><div class="stat"><span class="tiny">Strategy fit</span><b>${answered?avg+"%":"—"}</b></div></div>
+  <div style="margin-top:13px"><div class="tiny">Chunk 3 progress</div><div class="bar"><i style="width:${answered/50*100}%"></i></div></div>
+  <div class="sourcebox"><b>Accuracy note:</b> These 50 spots are restricted to mixed cells in the seven supplied 100bb BB-vs-RFI charts. No pure cell is presented as mixed. Per-cell frequencies use the chart-derived 5% increments already established in the earlier chunks.</div></div>
+  <div class="card"><div class="section-title"><h3>Reference range chart</h3><span class="pill">${chartPos}</span></div><div id="chartbox">${renderRangeChart(chartPos)}</div></div>
+  ${spotCard(spot,i,S.answers3)}
+  <div class="card"><div class="section-title"><b>Chunk 3 route</b><span class="pill">${Object.values(spotCounts3).join(" + ")} = 50</span></div><div class="muted">UTG 7 · UTG+1 7 · LJ 8 · HJ 8 · CO 8 · BTN 6 · SB 6</div><div class="nextbar"><button class="btn secondary" onclick="prevSpot3()" ${i===0?'disabled':''}>← Previous</button><span class="tiny">Spot ${i+1}/50</span><button class="btn" onclick="nextSpot3()" ${i>=49?'disabled':''}>Next →</button></div></div>
+  <div class="card"><div class="section-title"><h3>Finish Chunk 3</h3><span class="pill">${answered}/50</span></div><p class="muted">Complete all 50 mixed-strategy spots to unlock Day 4.</p><button class="btn" onclick="completeDay3()" ${answered<50?'disabled':''}>Complete Day 3</button></div>`;
+}
 function renderToday(){
- let lesson=lesson30[Math.min(S.day,30)-1];
- document.getElementById("header").textContent=`Day ${S.day}/90 · ${S.done.length} complete`;
- if(S.day!==1){
-   document.getElementById("today").innerHTML=`<div class="card hero"><div class="kicker">Day ${lesson.d} · ${lesson.m}</div><div class="title">${lesson.t}</div><p class="muted">${lesson.p}</p><div class="card" style="margin-top:14px;background:#0b1322"><b>Next lesson is loaded as a placeholder.</b><p class="muted">The first fully playable lesson is Day 1. We're building the later days in the same play-the-hand format.</p></div></div>`;
-   return;
- }
- const answered=S.lessonAns||{};
- const completed=day1Spots.filter((_,i)=>answered[i]!==undefined).length;
- const correct=day1Spots.filter((x,i)=>answered[i]!==undefined && answered[i]===x.a).length;
- const cards=day1Spots.map((spot,i)=>{
-   const selected=answered[i];
-   const submitted=selected!==undefined;
-   const opts=spot.opts.map((o,j)=>`<button class="chip ${selected===j?'sel':''}" onclick="pickSpot(${i},${j})" ${submitted?'disabled':''}>${o}</button>`).join('');
-   const feedback=submitted?`<div class="feedback ${selected===spot.a?'good':'bad'}"><b>${selected===spot.a?'Correct.':'Review this one.'}</b><div class="explain"><p><b>Benchmark:</b> ${spot.g}</p><p><b>GTO principle:</b> ${spot.gto}</p><p><b>Other things:</b> ${spot.p}</p></div></div>`:'';
-   return `<div class="card spot-card"><div class="section-title"><h3>Spot ${i+1} of ${day1Spots.length}</h3><span class="pill">${submitted?(selected===spot.a?'✓ Correct':'Review'):'Not answered'}</span></div>${spotVisual(spot)}<p class="decision-title"><b>${spot.q}</b></p><div class="chiprow">${opts}</div>${feedback}</div>`;
- }).join('');
- document.getElementById("today").innerHTML=`<div class="card hero"><div class="kicker">Day 1 · Preflop</div><div class="title">Big Blind Defence vs Button</div><p class="muted">Today is deliberately practical. See the hand, choose the chips, then get a short benchmark and explanation. Don't try to be perfect — build the process.</p><div class="grid"><div class="stat"><span class="tiny">Lesson</span><b>${completed}/${day1Spots.length} spots</b></div><div class="stat"><span class="tiny">Accuracy</span><b>${completed?Math.round(correct/completed*100)+'%':'—'}</b></div></div><div style="margin-top:15px"><div class="tiny">Today's progress</div><div class="bar"><i style="width:${completed/day1Spots.length*100}%"></i></div></div></div>
- <div class="card"><div class="section-title"><h3>60-minute plan</h3><span class="pill">Day 1</span></div><p>10m — Learn the price / position / playability framework</p><p>30m — Play the 10 decisions below</p><p>15m — Review the benchmarks and your mistakes</p><p>5m — Write one takeaway</p></div>
- ${cards}
- <div class="card"><h3>Finish today's lesson</h3><p class="muted">Complete all 10 spots, then mark Day 1 complete. Day 2 is already waiting in the 30-day roadmap.</p><button class="btn" onclick="completeDay1()" ${completed<day1Spots.length?'disabled':''}>Complete Day 1</button></div>`;
+  if(S.day>=3) renderDay3(); else if(S.day>=2) renderDay2(); else renderDay1();
 }
-function pickSpot(i,j){
-  if(S.lessonAns && S.lessonAns[i]!==undefined)return;
-  S.lessonAns=S.lessonAns||{}; S.lessonAns[i]=j; save(); renderToday();
+function answerCurrent(i,j){
+  const target=S.day>=3?S.answers3:(S.day>=2?S.answers2:S.answers);
+  if(target[i]!==undefined)return;
+  target[i]=j; save(); renderToday(); window.scrollTo(0,0);
 }
-function completeDay1(){
-  const all=day1Spots.every((_,i)=>S.lessonAns && S.lessonAns[i]!==undefined);
-  if(!all)return;
-  if(!S.done.includes(1))S.done.push(1);
-  S.day=2; save(); page('today');
-}
-function streak(){let n=0;for(let d=S.day;d>=1;d--){if(S.done.includes(d))n++;else if(d!==S.day)break}return n}
-function streak(){let n=0;for(let d=S.day;d>=1;d--){if(S.done.includes(d))n++;else if(d!==S.day)break}return n}
+function nextSpot(){S.spot=Math.min(S.spot+1,49);save();renderToday();window.scrollTo(0,0)}
+function prevSpot(){S.spot=Math.max(S.spot-1,0);save();renderToday();window.scrollTo(0,0)}
+function nextSpot2(){S.spot2=Math.min(S.spot2+1,49);save();renderToday();window.scrollTo(0,0)}
+function prevSpot2(){S.spot2=Math.max(S.spot2-1,0);save();renderToday();window.scrollTo(0,0)}
+function nextSpot3(){S.spot3=Math.min(S.spot3+1,49);save();renderToday();window.scrollTo(0,0)}
+function prevSpot3(){S.spot3=Math.max(S.spot3-1,0);save();renderToday();window.scrollTo(0,0)}
+function completeDay1(){if(Object.keys(S.answers).length<50)return;if(!S.done.includes(1))S.done.push(1);S.day=Math.max(S.day,2);S.spot2=0;save();renderToday()}
+function completeDay2(){if(Object.keys(S.answers2).length<50)return;if(!S.done.includes(2))S.done.push(2);S.day=Math.max(S.day,3);save();renderToday()}
+function completeDay3(){if(Object.keys(S.answers3).length<50)return;if(!S.done.includes(3))S.done.push(3);S.day=Math.max(S.day,4);save();renderToday()}
+
 function renderTrain(){
- document.getElementById("train").innerHTML=`<div class="card hero"><div class="kicker">30-day curriculum</div><div class="title">Play the game, then learn</div><p class="muted">The first 30 days are loaded. Day 1 starts with Big Blind defence. Each decision is presented as chips first; after you answer, you get a short GTO-style benchmark and practical considerations.</p></div>${lesson30.map(x=>`<div class="row"><b>Day ${x.d} · ${x.t}</b><span class="pill">${x.m}</span><div class="muted">${x.p}</div></div>`).join('')}`;
+ document.getElementById("train").innerHTML=`<div class="card hero"><div class="kicker">Curriculum</div><div class="title">30-day tournament progression</div><p class="muted">Two preflop precision blocks are now live. Later days remain staged until their reference material is verified to the same standard.</p></div>${roadmap.map((x,i)=>`<div class="row"><b>${x[0]} · ${x[1]}</b><span class="pill">${i<3?(S.done.includes(i+1)?"COMPLETE":"LIVE"):"ROADMAP"}</span><div class="muted">${x[2]}</div></div>`).join("\n")}`;
 }
-function answerExample(i,j){if(S.exDone[i]===undefined){S.exDone[i]=j;save();renderTrain()}}
+
 function renderReview(){
- document.getElementById("review").innerHTML=`<div class="card"><div class="kicker">Hand review lab</div><h2>Capture uncertainty</h2><p class="muted">Don't only save huge pots. Save hands where your reasoning felt unclear.</p>
- <label>Hand / situation</label><textarea id="ht" placeholder="30bb, BTN opens 2.2x with A♠7♠, BB calls..."></textarea>
- <label>My decision</label><input id="dec" placeholder="Bet 25%">
- <label>Confidence 1–5</label><select id="conf"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
- <label>What was I thinking?</label><textarea id="think"></textarea>
- <label>After review: what would I change?</label><textarea id="learn"></textarea>
- <div class="actions"><button class="btn" id="saveh">Save hand</button></div></div>
- <div class="card"><h3>Saved hands (${S.hands.length})</h3><div class="list">${S.hands.slice().reverse().map(h=>`<div class="row"><b>${h.date}</b><span class="pill">Confidence ${h.conf}/5</span><div class="hand">${esc(h.hand)}</div><div class="muted"><b>Decision:</b> ${esc(h.dec)}</div><div class="muted"><b>Thinking:</b> ${esc(h.think)}</div><p><b>Lesson:</b> ${esc(h.learn||"Add after review.")}</p></div>`).join("")||"<p class='muted'>No hands saved yet.</p>"}</div></div>`;
+ document.getElementById("review").innerHTML=`<div class="card"><div class="kicker">Hand review lab</div><h2>Capture uncertainty</h2><p class="muted">Save hands where your reasoning felt unclear, not only huge pots.</p>
+ <label>Hand / situation</label><textarea id="ht" placeholder="30bb, BTN opens 2.2x, BB calls..."></textarea><label>My decision</label><input id="dec" placeholder="Bet 25%"><label>Confidence 1–5</label><select id="conf"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select><label>What was I thinking?</label><textarea id="think"></textarea><label>After review: what would I change?</label><textarea id="learn"></textarea><div class="actions"><button class="btn" id="saveh">Save hand</button></div></div>
+ <div class="card"><h3>Saved hands (${S.hands.length})</h3><div class="list">${S.hands.slice().reverse().map(h=>`<div class="row"><b>${esc(h.date)}</b><span class="pill">Confidence ${esc(h.conf)}/5</span><div style="margin-top:7px">${esc(h.hand)}</div><div class="muted"><b>Decision:</b> ${esc(h.dec)}</div><div class="muted"><b>Thinking:</b> ${esc(h.think)}</div><p><b>Lesson:</b> ${esc(h.learn||"Add after review.")}</p></div>`).join("")||"<p class='muted'>No hands saved yet.</p>"}</div></div>`;
  document.getElementById("saveh").onclick=()=>{let h={date:new Date().toLocaleString(),hand:ht.value,dec:dec.value,conf:conf.value,think:think.value,learn:learn.value};if(!h.hand.trim())return;S.hands.push(h);save();renderReview()}
 }
+
 function renderProgress(){
- let answered=Object.keys(S.ans).length, correct=Object.entries(S.ans).filter(([d,a])=>{let e=qForDay(+d);return a===e.a}).length;
- document.getElementById("progress").innerHTML=`<div class="card hero"><div class="kicker">Your development</div><div class="title">Progress, not results</div><div class="grid"><div class="stat"><span class="tiny">Days</span><b>${S.done.length}/90</b></div><div class="stat"><span class="tiny">Drill accuracy</span><b>${answered?Math.round(correct/answered*100)+"%":"—"}</b></div><div class="stat"><span class="tiny">Hands reviewed</span><b>${S.hands.length}</b></div><div class="stat"><span class="tiny">Examples attempted</span><b>${S.exDone.length}</b></div></div></div>
- <div class="card"><h3>Weekly review</h3><textarea id="wn" placeholder="What improved? What keeps going wrong? What will I focus on next week?">${esc(S.notes)}</textarea><div class="actions"><button class="btn" onclick="S.notes=document.getElementById('wn').value;save()">Save review</button></div></div>
- <div class="card"><h3>Bankroll discipline</h3><p class="muted">Keep poker money separate from living expenses. Set a regular ABI, a move-down rule and a shot-taking rule before results influence you.</p></div>
- <div class="card"><button class="btn ghost" onclick="if(confirm('Reset all app data?')){localStorage.removeItem('pc_pwa');location.reload()}">Reset all data</button></div>`;
+ const a1=Object.keys(S.answers).length, a2=Object.keys(S.answers2).length, a3=Object.keys(S.answers3).length;
+ const score1=Object.entries(S.answers).reduce((sum,[i,a])=>sum+scoreFor(+a,freqFor(spots[+i].pos,spots[+i].h)),0);
+ const score2=Object.entries(S.answers2).reduce((sum,[i,a])=>sum+scoreFor(+a,freqFor(spots2[+i].pos,spots2[+i].h)),0);
+ const score3=Object.entries(S.answers3).reduce((sum,[i,a])=>sum+scoreFor(+a,freqFor(spots3[+i].pos,spots3[+i].h)),0);
+ const answered=a1+a2+a3, score=score1+score2+score3, avg=answered?Math.round(score/answered):0;
+ document.getElementById("progress").innerHTML=`<div class="card hero"><div class="kicker">Development</div><div class="title">Process over results</div><div class="grid"><div class="stat"><span class="tiny">Days complete</span><b>${S.done.length}/30</b></div><div class="stat"><span class="tiny">Chunk 1</span><b>${a1}/50</b></div><div class="stat"><span class="tiny">Chunk 2</span><b>${a2}/50</b></div><div class="stat"><span class="tiny">Chunk 3</span><b>${a3}/50</b></div><div class="stat"><span class="tiny">Overall fit</span><b>${answered?avg+"%":"—"}</b></div><div class="stat"><span class="tiny">Hands reviewed</span><b>${S.hands.length}</b></div></div></div>
+ <div class="card"><h3>Chunk performance</h3><div class="row"><b>Chunk 1</b><span class="pill">${a1}/50</span><div class="muted">Strategy fit: ${a1?Math.round(score1/a1)+"%":"—"}</div></div><div class="row"><b>Chunk 2</b><span class="pill">${a2}/50</span><div class="muted">Strategy fit: ${a2?Math.round(score2/a2)+"%":"—"}</div></div><div class="row"><b>Chunk 3</b><span class="pill">${a3}/50</span><div class="muted">Strategy fit: ${a3?Math.round(score3/a3)+"%":"—"}</div></div></div>
+ <div class="card"><h3>Weekly review</h3><textarea id="wn" placeholder="What improved? What keeps going wrong? What will I focus on next week?">${esc(S.notes)}</textarea><div class="actions"><button class="btn" onclick="S.notes=document.getElementById('wn').value;save();renderProgress()">Save review</button></div></div>
+ <div class="card"><h3>Chart coverage</h3>${POSITIONS.map(p=>`<div class="row" style="margin-top:7px"><b>BB vs ${p}</b><div class="muted">Reference: Raise ${charts[CHART_KEY[p]].summary[0]}% · Call ${charts[CHART_KEY[p]].summary[1]}% · Fold ${charts[CHART_KEY[p]].summary[2]}%</div></div>`).join("")}</div>
+ <div class="card"><button class="btn ghost" onclick="if(confirm('Reset all app data?')){localStorage.removeItem('pc_pwa_v5');localStorage.removeItem('pc_pwa_v4');location.reload()}">Reset all data</button></div>`;
 }
-function esc(s){return String(s||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]) )}
-function render(){renderToday();document.getElementById("header").textContent=`Day ${S.day}/90 · ${S.done.length} complete`}
+function render(){page("today")}
 render();
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(()=>{}));
-}
+if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
 </script>
 </body></html>
