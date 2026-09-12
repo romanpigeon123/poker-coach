@@ -1,30 +1,17 @@
-# Poker Coach — Chunk 3
+# Poker Coach — Pass 5
 
-Mobile-first PWA for structured MTT poker training.
+Pass 5 adds the **BTN GTO Complete-Hand Lab**.
 
-## Chunk 3
-- Day 3: 50 mixed-strategy BB-vs-RFI preflop spots.
-- Every spot is taken from a chart cell that contains at least two non-zero actions.
-- Covers UTG, UTG+1, LJ, HJ, CO, BTN and SB.
-- No hand/position pair repeats Chunk 1 or Chunk 2.
-- Uses the seven supplied 100bb 8-max BB-vs-RFI charts as the reference source.
-- Mixed Raise/Call/Fold cells are preserved and scored by reference frequency.
-- The drill focuses on mixed cells so the player learns not to force binary decisions where the reference strategy is mixed.
+## What changed
+- Keeps the learner on one position (BTN) while moving through preflop, flop, turn and river concepts.
+- Adds connected-hand scenarios rather than another large block of disconnected preflop drills.
+- Covers static paired flops, connected two-tone boards, turn categories, river range logic, deep-stack BTN vs 3-bet concepts, and full-hand planning.
+- Clearly separates source-supported GTO concepts from exact solver frequencies that are not available for a specific setup.
+- Existing Pass 4 Decision Tree remains available.
+- Progress is saved in the existing localStorage key.
 
-## Drill and chart experience
-- The current decision drill is the first thing shown on the Today screen.
-- The reference range chart stays hidden until an action has been selected.
-- After answering, the relevant chart opens below the feedback.
-- Chart heading: **Big Blind Range Chart**.
-- Chart selectors: **vs UTG RFI**, **vs UTG+1 RFI**, **vs LJ RFI**, **vs HJ RFI**, **vs CO RFI**, **vs BTN RFI**, **vs SB RFI**.
-- Mixed cells remain visually split between Raise, Call and Fold.
+## Source scope
+The lessons are grounded in the supplied copy of Michael Acevedo's *Modern Poker Theory*. The book presents aggregated solver results, patterns and heuristics for representative MTT/postflop situations rather than a universal combo-frequency answer for every hand. Pass 5 therefore does not fabricate frequencies where the source does not provide them.
 
-## PWA
-- `manifest.json` included.
-- `sw.js` cache version bumped to v7.
-- iPhone standalone metadata and icons included.
-- Offline cache includes the core app assets.
-- Local storage migrates existing progress into the v7 schema while retaining previous Chunk 1/2/3 data.
-
-## GitHub Pages
-Upload/replace the files in the repository root and allow GitHub Pages a few minutes to publish. Keep the same repository and URL so the existing iPhone Home Screen shortcut remains pointed at the app.
+## Install/update
+Replace the files in the existing GitHub Pages repository. Keep the same repository and URL.
