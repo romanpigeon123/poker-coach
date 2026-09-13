@@ -1,17 +1,18 @@
-# Poker Coach — Pass 8
+# Poker Coach — Simplified GTO Training Build
 
-Mobile-first poker training PWA for a GTO-first MTT study plan.
+Mobile-first PWA for progressive MTT GTO training.
 
-## Pass 8
-- **BTN River Engine:** completes the BTN postflop sequence from flop → turn → river.
-- River range reconstruction, fixed river hand values, hand-vs-range equity, polarized betting, value/bluff composition, Alpha/MDF, bluff-catching, blockers, sizing, traps and SPR.
-- Source-backed river math examples are labelled as examples rather than universal frequencies.
-- **BB Complete-Hand Engine:** builds on the existing supplied 100bb BB-vs-RFI charts and trains BB vs BTN/CO across preflop context, flop, turn and river.
-- GTO only: no population exploits and no invented solver frequencies.
-- Progress is saved locally; each module can be reset independently.
+## Pass 9 architecture
+- Two tabs only: Drills and Progress.
+- All training lessons live under Drills.
+- Each lesson has a short concept explanation followed by 50 drill spots.
+- Lessons remain accessible at all times; no artificial day locks.
+- Progressive hand context: flop lessons begin with preflop; turn lessons begin with preflop + flop; river lessons begin with the full hand history.
+- BTN sequence: preflop, flop, turn, river.
+- BB sequence: preflop defence, flop defence, turn, river.
+- Existing BB-vs-RFI 50-spot foundation is retained and migrated into the new lesson system.
+- GTO-only focus; no population/exploitative adjustments.
+- Conceptual material follows the supplied copy of Michael Acevedo's Modern Poker Theory. Exact solver frequencies are not invented where the source does not provide them.
 
-## Source
-The training framework is grounded in the user's supplied copy of Michael Acevedo's *Modern Poker Theory: Building an unbeatable strategy based on GTO principles*. The app uses original paraphrases and authored drills rather than reproducing the book's text.
-
-## Deploy
-Replace the existing GitHub Pages files in the same repository. Keep `manifest.json`, icons and `sw.js` together with `index.html`.
+## Install
+Upload all files to the existing GitHub Pages repository/root. Keep the same URL.
