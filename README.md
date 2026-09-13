@@ -1,17 +1,17 @@
-# Poker Coach — Pass 5
+# Poker Coach — Pass 8
 
-Pass 5 adds the **BTN GTO Complete-Hand Lab**.
+Mobile-first poker training PWA for a GTO-first MTT study plan.
 
-## What changed
-- Keeps the learner on one position (BTN) while moving through preflop, flop, turn and river concepts.
-- Adds connected-hand scenarios rather than another large block of disconnected preflop drills.
-- Covers static paired flops, connected two-tone boards, turn categories, river range logic, deep-stack BTN vs 3-bet concepts, and full-hand planning.
-- Clearly separates source-supported GTO concepts from exact solver frequencies that are not available for a specific setup.
-- Existing Pass 4 Decision Tree remains available.
-- Progress is saved in the existing localStorage key.
+## Pass 8
+- **BTN River Engine:** completes the BTN postflop sequence from flop → turn → river.
+- River range reconstruction, fixed river hand values, hand-vs-range equity, polarized betting, value/bluff composition, Alpha/MDF, bluff-catching, blockers, sizing, traps and SPR.
+- Source-backed river math examples are labelled as examples rather than universal frequencies.
+- **BB Complete-Hand Engine:** builds on the existing supplied 100bb BB-vs-RFI charts and trains BB vs BTN/CO across preflop context, flop, turn and river.
+- GTO only: no population exploits and no invented solver frequencies.
+- Progress is saved locally; each module can be reset independently.
 
-## Source scope
-The lessons are grounded in the supplied copy of Michael Acevedo's *Modern Poker Theory*. The book presents aggregated solver results, patterns and heuristics for representative MTT/postflop situations rather than a universal combo-frequency answer for every hand. Pass 5 therefore does not fabricate frequencies where the source does not provide them.
+## Source
+The training framework is grounded in the user's supplied copy of Michael Acevedo's *Modern Poker Theory: Building an unbeatable strategy based on GTO principles*. The app uses original paraphrases and authored drills rather than reproducing the book's text.
 
-## Install/update
-Replace the files in the existing GitHub Pages repository. Keep the same repository and URL.
+## Deploy
+Replace the existing GitHub Pages files in the same repository. Keep `manifest.json`, icons and `sw.js` together with `index.html`.
